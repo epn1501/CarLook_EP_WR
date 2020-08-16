@@ -75,7 +75,7 @@ public class LoginControl{
     }
 
     public static void logoutUser(){
-        UI.getCurrent().getPage().setLocation("/TutALDAVaadin");
+        UI.getCurrent().getPage().setLocation("/CarLook_EP_WR");
         UI.getCurrent().getSession().close();
     }
 

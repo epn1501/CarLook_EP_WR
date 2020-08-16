@@ -6,6 +6,7 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
 import model.objects.dto.User;
 import process.control.LoginControl;
 import process.control.exceptions.DatabaseException;
@@ -47,6 +48,12 @@ public class LoginView extends VerticalLayout implements View {
 
         this.addComponent(panel);
         this.setComponentAlignment(panel, Alignment.MIDDLE_CENTER);
+
+        Button buttonRegister = new Button("Noch nicht registriert?");
+        buttonRegister.addStyleName(ValoTheme.BUTTON_LINK);
+        buttonRegister.addClickListener(event -> UI.getCurrent().getNavigator().navigateTo(Views.REGISTER));
+        layout.addComponent(buttonRegister);
+        layout.setComponentAlignment(buttonRegister, Alignment.BOTTOM_CENTER);
 
         panel.setContent(layout);
         panel.setSizeUndefined();

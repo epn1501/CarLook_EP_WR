@@ -49,13 +49,21 @@ public class TopPanel extends HorizontalLayout {
         item1.addItem("Logout", FontAwesome.SIGN_OUT, new MenuBar.Command() {
             @Override
             public void menuSelected(MenuBar.MenuItem selectedItem) {
+
                 LoginControl.logoutUser();
             }
         });
 
+        //Liste der Reservierungen -> Cancle
+        item1.addItem("Reservierungen", FontAwesome.LIST, new MenuBar.Command() {
+            @Override
+            public void menuSelected(MenuBar.MenuItem selectedItem) {
+
+                //LoginControl.logoutUser();
+            }
+        });
 
         // Stornierung von Reservierungen
-
         if(user.hasRole (Roles.POWER_USER)) {
 
             item1.addItem("Cancel", FontAwesome.UNLINK, new MenuBar.Command() {
