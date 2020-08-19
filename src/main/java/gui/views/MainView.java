@@ -81,22 +81,23 @@ public class MainView extends VerticalLayout implements View {
         grid.addColumn(Auto::getDescription).setCaption("Description");
         grid.setSizeFull();
 
+        SingleSelect<Auto> selection = grid.asSingleSelect();
+
+
         //Video 3
 
 
 
         Button reserviereButton = new Button("Reservieren", (Button.ClickListener) clickEvent -> {
 
-          // if(MainView.this.autoSelektiert == null){
-           //    return;
-            //}
-         //  else {
-                Notification.show("Auto reserviert!");
+           if(selection == null){
+               return;
+            }
+           else {
+                //Notification.show("Auto reserviert!");
+                Notification.show("Das Auto mit der ID: " + selection.getValue().getId()+ " wurde reserviert!");
                 //System.out.println("Auto selektiert: " + MainView.this.autoSelektiert.getMarke());
-
-
-
-         //   }
+           }
         });
 
         grid.addItemClickListener((ItemClickListener<Auto>)
