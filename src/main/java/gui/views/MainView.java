@@ -85,14 +85,7 @@ public class MainView extends VerticalLayout implements View {
 
         SingleSelect<Auto> selection = grid.asSingleSelect();
 
-
-        //Video 3
-
-
-
         Button reserviereButton = new Button("Reservieren", (Button.ClickListener) clickEvent -> {
-
-
 
            if(selection.isEmpty()){
                Notification.show("Bitte wählen Sie ein Auto aus!", Notification.Type.WARNING_MESSAGE);
@@ -106,8 +99,8 @@ public class MainView extends VerticalLayout implements View {
         });
 
         grid.addItemClickListener((ItemClickListener<Auto>)
-                itemClick -> System.out.println("Zeile selektiert: " + itemClick.getItem().toString()));
-
+                //itemClick -> System.out.println("Zeile selektiert: " + itemClick.getItem().toString()));
+                itemClick -> System.out.println("Zeile selektiert: " + itemClick.getItem().getId()));
 
 
 

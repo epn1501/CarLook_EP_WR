@@ -5,6 +5,8 @@ import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.MenuBar;
+import gui.windows.ReservierungsWindow;
+import model.objects.dto.Auto;
 import model.objects.dto.User;
 import process.control.LoginControl;
 import services.util.Roles;
@@ -14,6 +16,7 @@ import java.awt.*;
 
 public class TopPanel extends HorizontalLayout {
     public static final String CLASSNAME = "TOPPANEL";
+    private Auto autoSelection = null;
 
     public TopPanel(){
 
@@ -59,7 +62,8 @@ public class TopPanel extends HorizontalLayout {
             @Override
             public void menuSelected(MenuBar.MenuItem selectedItem) {
 
-                //LoginControl.logoutUser();
+                ReservierungsWindow window = new ReservierungsWindow(TopPanel.this.autoSelection);
+                UI.getCurrent().addWindow(window);
 
             }
         });
@@ -68,7 +72,7 @@ public class TopPanel extends HorizontalLayout {
 
 
         // Stornierung von Reservierungen
-        if(user.hasRole (Roles.POWER_USER)) {
+        if(user.hasRole (Roles.ADMIN)) {
 
             item1.addItem("Cancel", FontAwesome.UNLINK, new MenuBar.Command() {
                 @Override
