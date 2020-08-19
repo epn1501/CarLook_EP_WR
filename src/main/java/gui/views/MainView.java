@@ -27,7 +27,7 @@ import javax.management.relation.Role;
 public class MainView extends VerticalLayout implements View {
 
     private int anzahlSuche = 0;
-    private Auto autoSelektiert = null;
+    //private Auto autoSelektiert = null;
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event){
@@ -90,8 +90,11 @@ public class MainView extends VerticalLayout implements View {
 
         Button reserviereButton = new Button("Reservieren", (Button.ClickListener) clickEvent -> {
 
-           if(selection == null){
-               return;
+
+
+           if(selection.isEmpty()){
+               Notification.show("Bitte wählen Sie ein Auto aus!", Notification.Type.WARNING_MESSAGE);
+               //return;
             }
            else {
                 //Notification.show("Auto reserviert!");
