@@ -1,5 +1,6 @@
 package gui.views;
 
+import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
@@ -53,6 +54,7 @@ public class MainView extends VerticalLayout implements View {
 
         final HorizontalLayout horizontalLayout = new HorizontalLayout();
         Button button = new Button("Suche", FontAwesome.SEARCH);
+        button.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         final TextField textField = new TextField();
 
         User user = (User) UI.getCurrent().getSession().getAttribute(Roles.CURRENT_USER);

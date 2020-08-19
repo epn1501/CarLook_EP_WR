@@ -1,5 +1,6 @@
 package gui.views;
 
+import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
@@ -39,6 +40,7 @@ public class LoginView extends VerticalLayout implements View {
         layout.addComponent(label);
 
         Button buttonLogin = new Button("Login", FontAwesome.SEARCH);
+        buttonLogin.setClickShortcut(ShortcutAction.KeyCode.ENTER);
        // buttonLogin.setPrimaryStyleName(CLASSNAME + "-login");
         layout.addComponent(buttonLogin);
         layout.setComponentAlignment(buttonLogin, Alignment.MIDDLE_CENTER);
