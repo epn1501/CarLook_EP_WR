@@ -13,6 +13,8 @@ import com.vaadin.ui.*;
 import gui.views.LoginView;
 import gui.views.MainView;
 import gui.views.RegisterView;
+import model.objects.dto.User;
+import services.util.Roles;
 import services.util.Views;
 
 
@@ -27,6 +29,14 @@ import services.util.Views;
 @Title("CarLook")
 public class MyUI extends UI {
 
+    private transient User user = null;
+    public User getUser(){
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -38,8 +48,15 @@ public class MyUI extends UI {
         navi.addView (Views.LOGIN, LoginView.class);
         navi.addView (Views.REGISTER, RegisterView.class);
 
+        this.user = (User) VaadinSession.getCurrent().getAttribute(Roles.CURRENT_USER);
+
         UI.getCurrent().getNavigator().navigateTo(Views.LOGIN);
 
+
+    }
+
+    public MyUI getMyUI(){
+        return (MyUI) UI.getCurrent();
     }
 
 

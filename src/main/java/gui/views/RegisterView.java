@@ -5,13 +5,22 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
+import model.dao.ReservierungDAO;
+import model.dao.UserDAO;
+import process.control.RegisterControl;
+import process.control.exceptions.DatabaseException;
+import services.db.JDBCConnection;
 import services.util.Views;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RegisterView extends VerticalLayout implements View {
     public static final String CLASSNAME ="REGISTERSEITE";
 
-
-    public void setUp(){
+    public void setUp()  {
 
         this.setSizeFull();
 
@@ -24,11 +33,11 @@ public class RegisterView extends VerticalLayout implements View {
         userNachname.setWidth("475px");
 
         final TextField userRegister = new TextField();
-        userRegister.setCaption("E-Mail: ");
+        userRegister.setCaption("*E-Mail: ");
         userRegister.setWidth("475px");
 
         final PasswordField passwordField = new PasswordField();
-        passwordField.setCaption("Passwort: ");
+        passwordField.setCaption("*Passwort: ");
         passwordField.setWidth("475px");
 
         VerticalLayout layout = new VerticalLayout();
@@ -45,14 +54,41 @@ public class RegisterView extends VerticalLayout implements View {
             @Override
             public void buttonClick(Button.ClickEvent event) {
 
+                String login = userRegister.getValue();
+                String password = passwordField.getValue();
+                String vorname = userVorname.getValue();
+                String nachname = userNachname.getValue();
+
+
+                if(userRegister.isEmpty() && passwordField.isEmpty()){
+                    Notification.show("Ihre Registrierung war nicht erfolgreich. ", Notification.Type.ERROR_MESSAGE);
+                }
+                else if (userRegister.isEmpty()){
+                    Notification.show("Die eingegebene E-Mail-Adresse ist ungültig!", Notification.Type.ERROR_MESSAGE);
+                }
+                else if(passwordField.isEmpty()){
+                    Notification.show("Das eingegebene Passwort entspricht leider nicht den Anforderungen!", Notification.Type.ERROR_MESSAGE);
+                }
+
+
+
                 //ToDo-Bedingung für MAIN, FELDER müssen korrekt ausgefüllt sein
                 //erst dann zu Main weiterleiten
+                else {
 
-                UI.getCurrent().getNavigator().navigateTo(Views.LOGIN);
+                    try{
+                        RegisterControl.registerUser(login, password, vorname, nachname);
+                    }catch (DatabaseException | SQLException ex){
+                        Notification.show("Fehler!", "Login oder Passwort falsch", Notification.Type.ERROR_MESSAGE);
+                        userRegister.setValue("");
+                        passwordField.setValue("");
+                    }
 
+
+                    //UI.getCurrent().getNavigator().navigateTo(Views.MAIN);
+                }
             }
         });
-
 
         //layout.addComponent(buttonRegister);
         //layout.setComponentAlignment(buttonRegister, Alignment.BOTTOM_RIGHT);
@@ -80,7 +116,9 @@ public class RegisterView extends VerticalLayout implements View {
         panel.setHeight("500px");
 
 
+
     }
+
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event){
