@@ -60,8 +60,12 @@ public class TopPanel extends HorizontalLayout {
             public void menuSelected(MenuBar.MenuItem selectedItem) {
 
                 //LoginControl.logoutUser();
+
             }
         });
+
+
+
 
         // Stornierung von Reservierungen
         if(user.hasRole (Roles.POWER_USER)) {
