@@ -81,7 +81,6 @@ public class MainView extends VerticalLayout implements View {
         grid.addColumn(Auto::getDescription).setCaption("Description");
         grid.setSizeFull();
 
-
         //Video 3
 
 
@@ -113,7 +112,7 @@ public class MainView extends VerticalLayout implements View {
 
 
                 if (marke.equals("")) {
-                    Notification.show(null, "Bitte marke eingeben!", Notification.Type.WARNING_MESSAGE);
+                    Notification.show(null, "Bitte Marke eingeben!", Notification.Type.WARNING_MESSAGE);
                 } else {
                     addComponent(grid);
                     setComponentAlignment(grid, Alignment.MIDDLE_CENTER);
