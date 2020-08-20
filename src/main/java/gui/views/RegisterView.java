@@ -5,17 +5,9 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
-import model.dao.ReservierungDAO;
+import gui.windows.ConfirmationWindow;
 import model.dao.UserDAO;
-import process.control.RegisterControl;
-import process.control.exceptions.DatabaseException;
-import services.db.JDBCConnection;
 import services.util.Views;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class RegisterView extends VerticalLayout implements View {
     public static final String CLASSNAME ="REGISTERSEITE";
@@ -48,7 +40,7 @@ public class RegisterView extends VerticalLayout implements View {
 
         Label label = new Label( "&nbsp;", ContentMode.HTML); //Platzhalter
 
-        Button buttonRegister = new Button("Weiter", FontAwesome.ARROW_RIGHT);
+        Button buttonRegister = new Button("Registrieren", FontAwesome.ARROW_RIGHT);
 
         buttonRegister.addClickListener(new Button.ClickListener() {
             @Override
@@ -61,7 +53,7 @@ public class RegisterView extends VerticalLayout implements View {
 
 
                 if(userRegister.isEmpty() && passwordField.isEmpty()){
-                    Notification.show("Ihre Registrierung war nicht erfolgreich. ", Notification.Type.ERROR_MESSAGE);
+                    Notification.show("Ihre Registrierung war nicht erfolgreich! Bitte erneut versuchen!", Notification.Type.ERROR_MESSAGE);
                 }
                 else if (userRegister.isEmpty()){
                     Notification.show("Die eingegebene E-Mail-Adresse ist ungültig!", Notification.Type.ERROR_MESSAGE);
@@ -73,19 +65,26 @@ public class RegisterView extends VerticalLayout implements View {
 
 
                 //ToDo-Bedingung für MAIN, FELDER müssen korrekt ausgefüllt sein
-                //erst dann zu Main weiterleiten
                 else {
-
-                    try{
-                        RegisterControl.registerUser(login, password, vorname, nachname);
-                    }catch (DatabaseException | SQLException ex){
-                        Notification.show("Fehler!", "Login oder Passwort falsch", Notification.Type.ERROR_MESSAGE);
-                        userRegister.setValue("");
-                        passwordField.setValue("");
+                     /*
+                    try {
+                        UserDAO.getInstance().createUser(login, password, vorname, nachname);
+                    } catch (SQLException exception) {
+                        exception.printStackTrace();
                     }
+                    */
+
+                    UserDAO reguest = new UserDAO();
+                    reguest.setLogin(login);
+                    reguest.setPassword(password);
+                    reguest.setVorname(vorname);
+                    reguest.setNachname(nachname);
 
 
-                    //UI.getCurrent().getNavigator().navigateTo(Views.MAIN);
+
+                    ConfirmationWindow window = new ConfirmationWindow("User wurde erstellt. Sie können sich jetzt einloggen!");
+                    UI.getCurrent().addWindow(window);
+                    UI.getCurrent().getNavigator().navigateTo(Views.LOGIN);
                 }
             }
         });
@@ -122,6 +121,8 @@ public class RegisterView extends VerticalLayout implements View {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event){
+
+
 
         this.setUp();
 

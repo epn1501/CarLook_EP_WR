@@ -16,14 +16,6 @@ public class RegisterControl {
 
     User user = ((MyUI) UI.getCurrent()).getUser();
 
-    /*
-    public boolean registerUser(String login, String passwort, String vorname, String nachname) throws DatabaseException{
-
-        boolean ergebenis = UserDAO.getInstance().createUser(login, passwort, vorname, nachname);
-        return ergebenis;
-
-    }
-    */
 
     /*
     public boolean chechUserExists(String login) throws DatabaseException{

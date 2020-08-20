@@ -23,6 +23,7 @@ public class ReservierungsWindow extends Window {
         content.setMargin(true);
         setContent(content);
 
+        setClosable(true);
 
 
         Button reserverierungsButton = new Button("OK");
