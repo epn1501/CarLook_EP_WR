@@ -7,7 +7,11 @@ import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import gui.windows.ConfirmationWindow;
 import model.dao.UserDAO;
+import model.objects.dto.User;
+import process.control.exceptions.DatabaseException;
 import services.util.Views;
+
+import java.sql.SQLException;
 
 public class RegisterView extends VerticalLayout implements View {
     public static final String CLASSNAME ="REGISTERSEITE";
@@ -62,25 +66,23 @@ public class RegisterView extends VerticalLayout implements View {
                     Notification.show("Das eingegebene Passwort entspricht leider nicht den Anforderungen!", Notification.Type.ERROR_MESSAGE);
                 }
 
-
-
                 //ToDo-Bedingung für MAIN, FELDER müssen korrekt ausgefüllt sein
                 else {
-                     /*
+
+                    User addUser = new User();
+                    addUser.setLogin(login);
+                    addUser.setPasswort(password);
+                    addUser.setVorname(vorname);
+                    addUser.setNachname(nachname);
+
                     try {
-                        UserDAO.getInstance().createUser(login, password, vorname, nachname);
-                    } catch (SQLException exception) {
-                        exception.printStackTrace();
+                        UserDAO.getInstance().addUser(addUser);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
                     }
-                    */
-
-                    UserDAO reguest = new UserDAO();
-                    reguest.setLogin(login);
-                    reguest.setPassword(password);
-                    reguest.setVorname(vorname);
-                    reguest.setNachname(nachname);
 
 
+                    //System.out.println("Login1: " +login + " Passwort1: " + password + " " + addUser.getNachname() + "" + addUser.getVorname());
 
                     ConfirmationWindow window = new ConfirmationWindow("User wurde erstellt. Sie können sich jetzt einloggen!");
                     UI.getCurrent().addWindow(window);

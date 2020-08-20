@@ -5,17 +5,17 @@ import model.objects.dto.User;
 
 public class Reservierung {
 
-    private int id;
+    private int reservierungsID;
     private User user;
     private Auto auto;
 
 
-    public int getId() {
-        return id;
+    public int getReservierungsID() {
+        return reservierungsID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setReservierungsID(int reservierungsID) {
+        this.reservierungsID = reservierungsID;
     }
 
     public User getUser() {

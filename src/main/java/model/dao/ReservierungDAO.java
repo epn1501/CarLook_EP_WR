@@ -76,7 +76,7 @@ public class ReservierungDAO extends AbstractDAO {
             Logger.getLogger(ReservierungDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        reservierung.setId(currentValue);
+        reservierung.setReservierungsID(currentValue);
 
     }
 

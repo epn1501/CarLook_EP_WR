@@ -13,6 +13,7 @@ import com.vaadin.ui.*;
 import gui.views.LoginView;
 import gui.views.MainView;
 import gui.views.RegisterView;
+import model.dao.UserDAO;
 import model.objects.dto.User;
 import services.util.Roles;
 import services.util.Views;
@@ -51,6 +52,7 @@ public class MyUI extends UI {
         this.user = (User) VaadinSession.getCurrent().getAttribute(Roles.CURRENT_USER);
 
         UI.getCurrent().getNavigator().navigateTo(Views.LOGIN);
+
 
 
     }
