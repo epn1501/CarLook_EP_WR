@@ -49,32 +49,45 @@ public class TopPanel extends HorizontalLayout {
         MenuBar bar = new MenuBar();
         MenuBar.MenuItem item1 = bar.addItem("Menu", null);
         //Logout des Users
-        item1.addItem("Logout", FontAwesome.SIGN_OUT, new MenuBar.Command() {
-            @Override
-            public void menuSelected(MenuBar.MenuItem selectedItem) {
+        if(user.hasRole (Roles.ADMIN ) || user.hasRole(Roles.CURRENT_USER) || user.hasRole(Roles.ENDKUNDE_USER) || user.hasRole(Roles.VERTRIEBLER_USER)) {
+            item1.addItem("Logout", FontAwesome.SIGN_OUT, new MenuBar.Command() {
+                @Override
+                public void menuSelected(MenuBar.MenuItem selectedItem) {
 
-                LoginControl.logoutUser();
-            }
-        });
+                    LoginControl.logoutUser();
+                }
+            });
+        }
 
         //Liste der Reservierungen -> Cancle
-        item1.addItem("Reservierungen", FontAwesome.LIST, new MenuBar.Command() {
-            @Override
-            public void menuSelected(MenuBar.MenuItem selectedItem) {
+        if(user.hasRole (Roles.ADMIN )  || user.hasRole(Roles.ENDKUNDE_USER) ) {
+            item1.addItem("Reservierungen", FontAwesome.LIST, new MenuBar.Command() {
+                @Override
+                public void menuSelected(MenuBar.MenuItem selectedItem) {
 
-                ReservierungsWindow window = new ReservierungsWindow(TopPanel.this.autoSelection);
-                UI.getCurrent().addWindow(window);
+                    ReservierungsWindow window = new ReservierungsWindow(TopPanel.this.autoSelection);
+                    UI.getCurrent().addWindow(window);
 
-            }
-        });
-
+                }
+            });
+        }
 
 
 
         // Stornierung von Reservierungen
-        if(user.hasRole (Roles.ADMIN)) {
+        if(user.hasRole (Roles.ADMIN) || user.hasRole(Roles.ENDKUNDE_USER)) {
 
             item1.addItem("Cancel", FontAwesome.UNLINK, new MenuBar.Command() {
+                @Override
+                public void menuSelected(MenuBar.MenuItem selectedItem) {
+                    // Todo: ein Window wird geöffnet... Buchung wird dann angezeigt und ggf. storniert
+                }
+            });
+        }
+        // Hinzufügen von neuen Autos
+        if(user.hasRole (Roles.ADMIN) || user.hasRole(Roles.VERTRIEBLER_USER)) {
+
+            item1.addItem("Hinzufügen", FontAwesome.PLUS_SQUARE_O, new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
                     // Todo: ein Window wird geöffnet... Buchung wird dann angezeigt und ggf. storniert

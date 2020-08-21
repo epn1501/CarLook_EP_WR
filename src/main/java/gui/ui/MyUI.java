@@ -2,6 +2,7 @@ package gui.ui;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -28,6 +29,7 @@ import services.util.Views;
  */
 @Theme("mytheme")
 @Title("CarLook")
+@PreserveOnRefresh
 public class MyUI extends UI {
 
     private transient User user = null;
