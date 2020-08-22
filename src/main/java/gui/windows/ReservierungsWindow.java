@@ -3,13 +3,16 @@ package gui.windows;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.client.widget.grid.DetailsGenerator;
+import com.sun.xml.internal.messaging.saaj.soap.impl.ElementFactory;
 import com.vaadin.client.widget.grid.RowReference;
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.event.*;
 import com.vaadin.event.selection.SelectionListener;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.*;
+import com.vaadin.ui.components.grid.*;
 import com.vaadin.ui.components.grid.ItemClickListener;
+import com.vaadin.ui.renderers.ComponentRenderer;
 import gui.views.MainView;
 import model.objects.dto.Auto;
 import model.objects.dto.NeueListeAuto;
@@ -17,10 +20,12 @@ import org.junit.jupiter.api.Order;
 import process.control.AutoSearch;
 import process.control.NeueListeAutoSearch;
 
+import javax.lang.model.element.Element;
 import java.lang.annotation.Inherited;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -31,6 +36,7 @@ public class ReservierungsWindow extends Window {
         super("Reservierungsliste");
         center();
 
+        int random =(int) (Math.random()*100);
 
         NeueListeAuto liste = new NeueListeAuto();
         liste.setId(99);
@@ -67,14 +73,29 @@ public class ReservierungsWindow extends Window {
         // new feature goind into vaadin: column reordering
         grid.setColumnReorderingAllowed(true);
 
+        Button auswahl = new Button("Reservieren");
 
         //Muilit-Selection1
-
         grid.setSelectionMode(Grid.SelectionMode.MULTI);
         grid.addSelectionListener(event -> {
             Set<NeueListeAuto> selected = event.getAllSelectedItems();
             Notification.show("Auto mit der ID: " + liste.getId() + " ausgewählt!");
+            auswahl.setCaption("Delete!");
+            auswahl.addClickListener(new Button.ClickListener() {
+                @Override
+                public void buttonClick(Button.ClickEvent event) {
+                    Notification.show("Selektion wurde gelöscht");
+                }
+            });
+            auswahl.addClickListener(new Button.ClickListener() {
+                @Override
+                public void buttonClick(Button.ClickEvent event) {
+                    auswahl.setCaption("Reservieren!");
+                    //Notification.show("Die Reservierung wurde versendet!");
+                }
+            });
         });
+
         MultiSelect<NeueListeAuto> selection = grid.asMultiSelect();
 
         content.addComponent(grid);
@@ -82,15 +103,13 @@ public class ReservierungsWindow extends Window {
         setContent(content);
         setClosable(true);
 
-
-
-        Button delete = new Button("Delete");
-        delete.addClickListener(new Button.ClickListener() {
+        auswahl.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
 
                 if(selection.isEmpty()){
-                    Notification.show("Keine Auswahl getätigt!");
+                    //test.setCaption("Reservieren!");
+                    Notification.show("Die Reservierung wurde mit der Nummer: " + random +" versendet!");
                     close();
                 }
                 else {
@@ -103,34 +122,8 @@ public class ReservierungsWindow extends Window {
             }
         });
 
-         Button reserverierungsButton = new Button("Reservieren");
-        //reserverierungsButton.addClickListener(newevent -> close());
-        reserverierungsButton.addClickListener(new Button.ClickListener() {
-            @Override
-            public void buttonClick(Button.ClickEvent event) {
-                //ReservierungRequest request = new ReservierungRequest();
-                //request.setAuto(auto);
-                //ReservierungProcess.getInstance().createReservierung(request, ReservierungsWindow.this);
-
-                if(selection.isEmpty()){
-                    Notification.show("Keine Auswahl getätigt!");
-                    close();
-                }
-                else {
-                    Notification.show("Reservierung wurde versendet!");
-                    close();
-                }
-            }
-        });
-
-
-
-
-        content.addComponents(delete, reserverierungsButton);
-        content.setComponentAlignment(delete, Alignment.MIDDLE_LEFT);
-        content.setComponentAlignment(reserverierungsButton, Alignment.MIDDLE_RIGHT);
-
-
+        content.addComponent(auswahl);
+        content.setComponentAlignment(auswahl, Alignment.MIDDLE_CENTER);
 
 
     }
