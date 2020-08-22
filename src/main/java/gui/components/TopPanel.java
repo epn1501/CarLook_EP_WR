@@ -72,10 +72,8 @@ public class TopPanel extends HorizontalLayout {
             });
         }
 
-
-
         // Stornierung von Reservierungen
-        if(user.hasRole (Roles.ADMIN) || user.hasRole(Roles.ENDKUNDE_USER)) {
+        if(user.hasRole (Roles.ADMIN)) {
 
             item1.addItem("Cancel", FontAwesome.UNLINK, new MenuBar.Command() {
                 @Override
@@ -84,6 +82,8 @@ public class TopPanel extends HorizontalLayout {
                 }
             });
         }
+
+
         // Hinzufügen von neuen Autos
         if(user.hasRole (Roles.ADMIN) || user.hasRole(Roles.VERTRIEBLER_USER)) {
 
