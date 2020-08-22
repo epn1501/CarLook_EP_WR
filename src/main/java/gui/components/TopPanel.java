@@ -90,7 +90,7 @@ public class TopPanel extends HorizontalLayout {
             item1.addItem("Hinzufügen", FontAwesome.PLUS_SQUARE_O, new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
-                    // Todo: ein Window wird geöffnet... Buchung wird dann angezeigt und ggf. storniert
+                    // Todo: ein Window wird geöffnet... Hinzufügen von neuen Autos
                 }
             });
         }

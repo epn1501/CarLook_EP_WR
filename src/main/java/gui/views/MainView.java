@@ -12,14 +12,21 @@ import com.vaadin.ui.components.grid.ItemClickListener;
 
 
 import gui.components.TopPanel;
+import gui.windows.ReservierungsWindow;
 import  model.objects.dto.Auto;
+import model.objects.dto.NeueListeAuto;
 import model.objects.dto.User;
 import  process.control.AutoSearch;
 
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import com.vaadin.ui.components.grid.*;
+import process.control.exceptions.DatabaseException;
+import services.db.JDBCConnection;
 import services.util.Roles;
 import services.util.Views;
 
@@ -49,12 +56,11 @@ public class MainView extends VerticalLayout implements View {
         this.addComponent( new TopPanel());
         this.addComponent(new Label ("<hr />", ContentMode.HTML)); //Linie
 
-
         setMargin(true);
 
         final HorizontalLayout horizontalLayout = new HorizontalLayout();
-        Button button = new Button("Suche", FontAwesome.SEARCH);
-        button.setClickShortcut(ShortcutAction.KeyCode.ENTER);
+        Button sucheButton = new Button("Suche", FontAwesome.SEARCH);
+        sucheButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         final TextField textField = new TextField();
 
         User user = (User) UI.getCurrent().getSession().getAttribute(Roles.CURRENT_USER);
@@ -67,11 +73,10 @@ public class MainView extends VerticalLayout implements View {
          }
         Label labelText = new Label(vorname + ", gebe eine Marke ein: ");
 
-
         horizontalLayout.addComponent(labelText);
         horizontalLayout.setComponentAlignment(labelText, Alignment.MIDDLE_CENTER);
         horizontalLayout.addComponent(textField);
-        horizontalLayout.addComponent(button);
+        horizontalLayout.addComponent(sucheButton);
         addComponent(horizontalLayout);
         setComponentAlignment(horizontalLayout, Alignment.BOTTOM_CENTER);
 
@@ -85,8 +90,8 @@ public class MainView extends VerticalLayout implements View {
 
         SingleSelect<Auto> selection = grid.asSingleSelect();
 
-        Button reserviereButton = new Button("Reservieren", (Button.ClickListener) clickEvent -> {
 
+        Button reserviereButton = new Button("Reservieren", (Button.ClickListener) clickEvent -> {
            if(selection.isEmpty()){
                Notification.show("Bitte wählen Sie ein Auto aus!", Notification.Type.WARNING_MESSAGE);
                //return;
@@ -95,6 +100,39 @@ public class MainView extends VerticalLayout implements View {
                 //Notification.show("Auto reserviert!");
                 Notification.show("Das Auto mit der ID: " + selection.getValue().getId()+ " wurde reserviert!");
                 //System.out.println("Auto selektiert: " + MainView.this.autoSelektiert.getMarke());
+
+               NeueListeAuto neueListe = new NeueListeAuto();
+               neueListe.setId(selection.getValue().getId());
+               neueListe.setMarke(selection.getValue().getMarke());
+               neueListe.setPs(selection.getValue().getPs());
+               neueListe.setBaujahr(selection.getValue().getBaujahr());
+               neueListe.setDescription(selection.getValue().getDescription());
+
+               System.out.println("Das Auto mit der ID: " + selection.getValue().getId() + " wurde ausgegeben!");
+               System.out.println(selection.getValue().getMarke());
+               System.out.println(selection.getValue().getDescription());
+               System.out.println(selection.getValue().getBaujahr());
+
+               /*
+               String sql = "INSERT INTO carlookew.neueListe VALUES (?,?,?,?,?)";
+               try {
+                   PreparedStatement statement = JDBCConnection.getInstance().getPreparedStatement(sql);
+
+                   statement.setInt(1, selection.getValue().getId());
+                   statement.setString(2, selection.getValue().getMarke());
+                   statement.setInt(3, selection.getValue().getPs());
+                   statement.setInt(4, selection.getValue().getBaujahr());
+                   statement.setString(5, selection.getValue().getDescription());
+
+                   statement.executeUpdate();
+
+
+               } catch (DatabaseException | SQLException exception) {
+                   exception.printStackTrace();
+               }
+
+                */
+
            }
         });
 
@@ -104,35 +142,26 @@ public class MainView extends VerticalLayout implements View {
 
 
 
-        button.addClickListener(new Button.ClickListener() {
+        //MainView -> SucheButton
+        sucheButton.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
                 String marke = textField.getValue();
-
 
                 if (marke.equals("")) {
                     Notification.show(null, "Bitte Marke eingeben!", Notification.Type.WARNING_MESSAGE);
                 } else {
                     addComponent(grid);
                     setComponentAlignment(grid, Alignment.MIDDLE_CENTER);
-
-
-
                     List<Auto> liste = AutoSearch.getInstance().getAutoByMarke(marke);
                     grid.setItems(liste);
                     grid.setLocale(Locale.GERMANY);
-
-
                     // grid.getColumn("ID").setMaximumWidth(70);
-
                     addComponent(reserviereButton);
                     setComponentAlignment(reserviereButton, Alignment.MIDDLE_CENTER);
-
                     MainView.this.anzahlSuche++;
                     grid.setCaption("Treffer für " + marke + " (Anzahl der Suche: " + MainView.this.anzahlSuche + ")");
-
                 }
-
             }
         });
 

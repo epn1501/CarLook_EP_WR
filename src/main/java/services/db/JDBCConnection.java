@@ -21,6 +21,11 @@ public class JDBCConnection {
     private Connection conn;
 
 
+    private JDBCConnection() throws DatabaseException {
+        this.initConnection();
+
+    }
+
     public  static JDBCConnection getInstance() throws DatabaseException {
         if(connection == null){
             connection = new JDBCConnection();
@@ -28,15 +33,11 @@ public class JDBCConnection {
         return connection;
     }
 
-    private JDBCConnection() throws DatabaseException {
-     this.initConnection();
-
-    }
 
     public void initConnection() throws DatabaseException {
         try {
-            DriverManager.registerDriver(new org.postgresql.Driver());
-
+            //DriverManager.registerDriver(new org.postgresql.Driver());
+            DriverManager.registerDriver(new Driver());
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBCConnection.class.getName()).log(Level.SEVERE, null, ex);
