@@ -64,7 +64,7 @@ public class MainView extends VerticalLayout implements View {
         final TextField textField = new TextField();
 
         User user = (User) UI.getCurrent().getSession().getAttribute(Roles.CURRENT_USER);
-                              //User user = ((MyUI) UI.getCurrent()).getUser();
+                                      //User user = ((MyUI) UI.getCurrent()).getUser();
 
         //Vorsichtsabfrage!
         String vorname = null;
