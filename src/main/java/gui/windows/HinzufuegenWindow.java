@@ -2,10 +2,12 @@ package gui.windows;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.components.grid.ItemClickListener;
 import model.objects.dto.Auto;
 
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.vaadin.ui.*;
 import model.objects.dto.NeueListeAuto;
@@ -19,7 +21,16 @@ public class HinzufuegenWindow extends Window {
         //setSizeFull();
 
         VerticalLayout content = new VerticalLayout();
-        //Grid<NeueListeAuto> grid = new Grid<>("Add");
+
+
+
+        Auto autos = new Auto();
+        autos.setId(100);
+        autos.setMarke("Porsche");
+        autos.setPs(450);
+        autos.setBaujahr(2014);
+        autos.setDescription("Unfallfrei");
+
 
 
         Grid<Auto> grid = new Grid<>("Add");
@@ -29,12 +40,16 @@ public class HinzufuegenWindow extends Window {
         grid.addColumn(Auto::getBaujahr).setCaption("Baujahr");
         grid.addColumn(Auto::getDescription).setCaption("Description");
 
-        grid.setItems();
+        grid.setItems(autos);
 
         // new feature goind into vaadin: column reordering
         grid.setColumnReorderingAllowed(true);
 
         grid.getDataCommunicator().fetchItemsWithRange(0, grid.getDataCommunicator().getDataProviderSize());
+
+
+
+
 
         content.addComponent(grid);
         content.setMargin(true);
