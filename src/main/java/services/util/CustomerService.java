@@ -49,7 +49,7 @@ public class CustomerService {
     }
         */
 
-    /*
+
     public void updateUser(User user) {
 
         try {
@@ -65,8 +65,8 @@ public class CustomerService {
         }
 
     }
-    /*
 
 
-     */
+
+
 }

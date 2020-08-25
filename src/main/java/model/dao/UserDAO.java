@@ -148,7 +148,7 @@ public class UserDAO extends AbstractDAO {
     public void addUser(User user) throws SQLException, DatabaseException {
 
         CustomerService service = new CustomerService();
-        //service.updateUser(user);
+        service.updateUser(user);
 
         System.out.println("User Login: " + user.getLogin()+ " User Passwort:  " + user.getPasswort());
 

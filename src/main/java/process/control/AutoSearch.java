@@ -61,4 +61,8 @@ public class AutoSearch {
         */
     }
 
+    public List<Auto> getAutoAll (){
+        return AutoDAO.getInstance().getAutoByAll();
+    }
+
 }

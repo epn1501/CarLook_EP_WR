@@ -95,8 +95,15 @@ public class TopPanel extends HorizontalLayout {
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
                     // Todo: ein Window wird geöffnet... Hinzufügen von neuen Autos
                     HinzufuegenWindow window = null;
+
+
+
+
                     try {
                         window = new HinzufuegenWindow(TopPanel.this.autoSelection);
+                        window.setWidth("70%");
+                        window.setHeight("70%");
+                        window.center();
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }

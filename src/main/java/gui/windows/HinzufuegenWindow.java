@@ -8,9 +8,11 @@ import model.objects.dto.Auto;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.vaadin.ui.*;
 import model.objects.dto.NeueListeAuto;
+import process.control.AutoSearch;
 
 public class HinzufuegenWindow extends Window {
 
@@ -23,24 +25,27 @@ public class HinzufuegenWindow extends Window {
         VerticalLayout content = new VerticalLayout();
 
 
-
+    /*
         Auto autos = new Auto();
         autos.setId(100);
         autos.setMarke("Porsche");
         autos.setPs(450);
         autos.setBaujahr(2014);
         autos.setDescription("Unfallfrei");
+*/
+
+        List<Auto> liste = AutoSearch.getInstance().getAutoAll();
 
 
-
-        Grid<Auto> grid = new Grid<>("Add");
+        Grid<Auto> grid = new Grid<>("Liste aller Autos");
         grid.addColumn(Auto::getId).setCaption("ID");
         grid.addColumn(Auto::getMarke).setCaption("Marke");
         grid.addColumn(Auto::getPs).setCaption("PS");
         grid.addColumn(Auto::getBaujahr).setCaption("Baujahr");
         grid.addColumn(Auto::getDescription).setCaption("Description");
 
-        grid.setItems(autos);
+        grid.setItems(liste);
+        grid.setSizeFull();
 
         // new feature goind into vaadin: column reordering
         grid.setColumnReorderingAllowed(true);
@@ -64,6 +69,7 @@ public class HinzufuegenWindow extends Window {
             }
         });
 
+        content.setSizeFull();
 
         content.addComponent(add);
         content.setComponentAlignment(add, Alignment.MIDDLE_CENTER);
