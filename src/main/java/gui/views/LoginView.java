@@ -24,24 +24,38 @@ public class LoginView extends VerticalLayout implements View {
 
         this.setSizeFull();
 
+        /*
+       Label titel = new Label("Carlook ltd.");
+        // titel.addStyleNames(ValoTheme.LABEL_H1);
+       titel.setWidth(null);
+       titel.setPrimaryStyleName(CLASSNAME + "-titel");
+       addComponent(titel);
+         */
+
+
         final TextField userLogin = new TextField();
         userLogin.setCaption("E-Mail Adresse: ");
+        userLogin.setPlaceholder("Email");
 
 
         final PasswordField passwordField = new PasswordField();
         passwordField.setCaption("Passwort: ");
+        passwordField.setPlaceholder("Passwort");
 
         VerticalLayout layout = new VerticalLayout();
         layout.addComponent(userLogin);
         layout.addComponent(passwordField);
 
+
+
         Label label = new Label( "&nbsp;", ContentMode.HTML); //Platzhalter
 
         layout.addComponent(label);
 
+
         Button buttonLogin = new Button("Login", FontAwesome.SEARCH);
         buttonLogin.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-       // buttonLogin.setPrimaryStyleName(CLASSNAME + "-login");
+        // buttonLogin.setPrimaryStyleName(CLASSNAME + "-login");
         layout.addComponent(buttonLogin);
         layout.setComponentAlignment(buttonLogin, Alignment.MIDDLE_CENTER);
 

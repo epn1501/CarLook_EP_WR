@@ -54,7 +54,7 @@ public class MainView extends VerticalLayout implements View {
     public void setUp(){
 
         this.addComponent( new TopPanel());
-        this.addComponent(new Label ("<hr />", ContentMode.HTML)); //Linie
+        this.addComponent(new Label ("<hr/>", ContentMode.HTML)); //Linie
 
         setMargin(true);
 

@@ -48,8 +48,8 @@ public class RoleDAO extends AbstractDAO{
 
         try{
             rs = statement.executeQuery("SELECT * " +
-                    "FROM carlookew.user_to_rolle " +
-                    "WHERE carlookew.user_to_rolle.login = \'" + user.getLogin() + "\'" );
+                    "FROM carlookwr.user_to_rolle " +
+                    "WHERE carlookwr.user_to_rolle.login = \'" + user.getLogin() + "\'" );
 
         } catch (SQLException ex) {
             Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,12 +70,11 @@ public class RoleDAO extends AbstractDAO{
                 liste.add(role);
             }
         }catch(SQLException ex){
-                Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return liste;
+            Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
+        return liste;
     }
 
+
+}
 

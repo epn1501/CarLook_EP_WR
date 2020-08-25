@@ -5,14 +5,15 @@ import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.MenuBar;
+import gui.windows.HinzufuegenWindow;
+import gui.windows.NewsWindow;
 import gui.windows.ReservierungsWindow;
 import model.objects.dto.Auto;
 import model.objects.dto.User;
 import process.control.LoginControl;
 import services.util.Roles;
 
-import javax.management.relation.Role;
-import java.awt.*;
+import java.sql.SQLException;
 
 public class TopPanel extends HorizontalLayout {
     public static final String CLASSNAME = "TOPPANEL";
@@ -31,10 +32,10 @@ public class TopPanel extends HorizontalLayout {
 
         HorizontalLayout horizontLayout = new HorizontalLayout();
 
-       User user = (User) UI.getCurrent().getSession().getAttribute(Roles.CURRENT_USER);
+        User user = (User) UI.getCurrent().getSession().getAttribute(Roles.CURRENT_USER);
         String vorname = null;
-       if(user != null){
-           vorname = user.getVorname();
+        if(user != null){
+            vorname = user.getVorname();
         }
 
 
@@ -72,13 +73,15 @@ public class TopPanel extends HorizontalLayout {
             });
         }
 
-        // Stornierung von Reservierungen
-        if(user.hasRole (Roles.ADMIN)) {
+        // News window
+        if(user.hasRole (Roles.ADMIN) || user.hasRole(Roles.ENDKUNDE_USER) || user.hasRole(Roles.VERTRIEBLER_USER) ) {
 
-            item1.addItem("Cancel", FontAwesome.UNLINK, new MenuBar.Command() {
+            item1.addItem("Nachrichten", FontAwesome.NEWSPAPER_O, new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
-                    // Todo: ein Window wird geöffnet... Buchung wird dann angezeigt und ggf. storniert
+                    // Todo: ein Window wird geöffnet um aktuelle Nachrichten/ Mitteilungen zu zeigen
+                    NewsWindow window = new NewsWindow();
+                    UI.getCurrent().addWindow(window);
                 }
             });
         }
@@ -91,6 +94,13 @@ public class TopPanel extends HorizontalLayout {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
                     // Todo: ein Window wird geöffnet... Hinzufügen von neuen Autos
+                    HinzufuegenWindow window = null;
+                    try {
+                        window = new HinzufuegenWindow(TopPanel.this.autoSelection);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    UI.getCurrent().addWindow(window);
                 }
             });
         }

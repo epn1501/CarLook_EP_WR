@@ -11,6 +11,7 @@ public class User {
     private String login = null;
     private String passwort = null;
     private List<Role> roles = null;
+    private String role = null;
 
     public String getVorname() {
 
@@ -47,8 +48,15 @@ public class User {
         return passwort;
     }
 
-    public boolean hasRole(String role) {
+    public void setRole(String role) {
+        this.role = role;
+    }
 
+    public String getRole() {
+        return role;
+    }
+
+    public boolean hasRole(String role) {
         //Lazy Load
         if (this.roles == null) {
             getRoles();
@@ -59,7 +67,7 @@ public class User {
                 return true;
             }
         }
-            return false;
+        return false;
     }
 
     /*
@@ -67,8 +75,10 @@ public class User {
         this.roles = roles;
     }
     */
-    private void getRoles() {
 
+
+
+    private void getRoles() {
         this.roles = RoleDAO.getInstance().getRolesForUser(this);
 
     }

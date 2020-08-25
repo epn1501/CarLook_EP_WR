@@ -12,7 +12,7 @@ public class Auto implements  java.io.Serializable {
 
     }
 
-    public Auto ( String marke, Integer id, Integer ps, Integer baujahr, String description){
+    public Auto ( Integer id, String marke, Integer ps, Integer baujahr, String description){
         this.id = id;
         this.marke = marke;
         this.ps = ps;

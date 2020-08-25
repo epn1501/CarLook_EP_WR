@@ -26,7 +26,7 @@ public class ReservierungDAO extends AbstractDAO {
     }
 
     public boolean addReservierung(Reservierung reservierung) {
-        String sql = "insert into carlookew.reservierung values (default, ?,?);";
+        String sql = "insert into carlookwr.reservierung values (default, ?,?);";
         PreparedStatement statement = this.getPreparedStatement(sql);
 
         //User user = (User) UI.getCurrent().getSession().getAttribute(Roles.CURRENT_USER);
@@ -62,8 +62,8 @@ public class ReservierungDAO extends AbstractDAO {
         ResultSet rs = null;
 
         try{
-            rs = statement.executeQuery("SELECT max(carlookew.reservierung.id)" +
-                    "FROM carlookew.reservierung");
+            rs = statement.executeQuery("SELECT max(carlookwr.reservierung.id)" +
+                    "FROM carlookwr.reservierung");
         }catch(SQLException ex){
             Logger.getLogger(ReservierungDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -84,10 +84,11 @@ public class ReservierungDAO extends AbstractDAO {
         Statement statement = this.getStatement();
 
         try{
-            statement.execute("DELETE FROM carlookew.reservierung WHERE carlookew.reservierung.id = \'" + id + "\';");
+            statement.execute("DELETE FROM carlookwr.reservierung WHERE carlookwr.reservierung.id = \'" + id + "\';");
         }catch(SQLException ex){
 
         }
     }
+
 
 }

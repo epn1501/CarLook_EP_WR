@@ -7,6 +7,7 @@ import model.objects.dto.User;
 import process.control.LoginControl;
 import process.control.exceptions.DatabaseException;
 import services.db.JDBCConnection;
+import services.util.CustomerService;
 import services.util.Roles;
 
 import java.net.PasswordAuthentication;
@@ -23,6 +24,8 @@ public class UserDAO extends AbstractDAO {
     private String password = null;
     private String vorname = null;
     private String nachname = null;
+    private String role = Roles.CURRENT_USER;
+
     private int number;
 
 
@@ -66,6 +69,13 @@ public class UserDAO extends AbstractDAO {
         this.number = number;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
 
     public UserDAO() {
 
@@ -89,8 +99,8 @@ public class UserDAO extends AbstractDAO {
 
         try {
             PreparedStatement statement = JDBCConnection.getInstance().getPreparedStatement("SELECT * " +
-                    "FROM carlookew.user "
-                    + "WHERE carlook.user.login = ?");
+                    "FROM carlookwr.user "
+                    + "WHERE carlookwr.user.login = ?");
             statement.setString(1, login);
             rs = statement.executeQuery();
 
@@ -118,7 +128,7 @@ public class UserDAO extends AbstractDAO {
     public boolean createUser(String login, String passwort, String vorname, String nachname) throws SQLException {
 
 
-            String query = " insert into carlookew.user (login, password, vorname, nachname) values (?,?,?,?, default)";
+            String query = " insert into carlookwr.user (login, password, vorname, nachname) values (?,?,?,?, default)";
             PreparedStatement statement = this.getPreparedStatement(query);
 
             statement.setString(1, getLogin());
@@ -134,74 +144,17 @@ public class UserDAO extends AbstractDAO {
     }
     */
 
-    /*
+
     public void addUser(User user) throws SQLException, DatabaseException {
 
-        try {
-            String sql = "INSERT INTO carlookew.user (login, password, vorname, nachname) VALUES (?, ?, ?, ?, default)";
-            PreparedStatement statement = this.getPreparedStatement(sql);
-
-            statement.setString(1, user.getLogin());
-            statement.setString(2, user.getPasswort());
-            statement.setString(3, user.getVorname());
-            statement.setString(4, user.getNachname());
-
-            statement.executeUpdate(sql);
-
-
-        }catch (Exception e) {
-            System.err.println("Got an exception! ");
-            System.err.println(e.getMessage());
-
-        }
-
+        CustomerService service = new CustomerService();
+        //service.updateUser(user);
 
         System.out.println("User Login: " + user.getLogin()+ " User Passwort:  " + user.getPasswort());
 
     }
-        */
 
 
-    public long addUser(User auswahl) throws SQLException {
-
-        String query = "INSERT INTO user (login, password,vorname, nachname)  VALUES (?,?,?,?, default)";
-
-        long id = 0;
-
-        try(PreparedStatement statement = this.getPreparedStatement(query)) {
-
-
-                statement.setString(1, auswahl.getLogin());
-                statement.setString(2, auswahl.getPasswort());
-                statement.setString(3, auswahl.getVorname());
-                statement.setString(4, auswahl.getNachname());
-
-                int affectedRows = statement.executeUpdate();
-
-                if(affectedRows > 0){
-                    try(ResultSet rs = statement.getGeneratedKeys()){
-                            if(rs.next()){
-                                id = rs.getLong(1);
-                            }
-
-
-                    }catch (SQLException ex){
-                        System.out.println(ex.getMessage());
-                    }
-
-                }
-
-
-            } catch (Exception e) {
-                System.err.println("Got an exception!");
-                System.err.println(e.getMessage());
-
-            }
-                return id;
-
-    }
 
 
 }
-
-

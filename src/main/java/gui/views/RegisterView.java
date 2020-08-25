@@ -9,6 +9,7 @@ import gui.windows.ConfirmationWindow;
 import model.dao.UserDAO;
 import model.objects.dto.User;
 import process.control.exceptions.DatabaseException;
+import services.util.Roles;
 import services.util.Views;
 
 import java.sql.SQLException;
@@ -23,18 +24,23 @@ public class RegisterView extends VerticalLayout implements View {
         final TextField userVorname = new TextField();
         userVorname.setCaption("Vorname: ");
         userVorname.setWidth("475px");
+        userVorname.setPlaceholder("Vorname");
+
 
         final TextField userNachname = new TextField();
         userNachname.setCaption("Nachname: ");
         userNachname.setWidth("475px");
+        userNachname.setPlaceholder("Nachname");
 
         final TextField userRegister = new TextField();
         userRegister.setCaption("*E-Mail: ");
         userRegister.setWidth("475px");
+        userRegister.setPlaceholder("Email");
 
         final PasswordField passwordField = new PasswordField();
         passwordField.setCaption("*Passwort: ");
         passwordField.setWidth("475px");
+        passwordField.setPlaceholder("Passwort");
 
         VerticalLayout layout = new VerticalLayout();
         layout.addComponent(userVorname);
@@ -69,15 +75,30 @@ public class RegisterView extends VerticalLayout implements View {
                 //ToDo-Bedingung für MAIN, FELDER müssen korrekt ausgefüllt sein
                 else {
 
+                    String s = login;
+
                     User addUser = new User();
                     addUser.setLogin(login);
                     addUser.setPasswort(password);
                     addUser.setVorname(vorname);
                     addUser.setNachname(nachname);
 
+
+
+
+                    if(s.length() >= 11 && (s.substring(s.length() - 11, s.length()).equals("@carlook.de"))){
+                        addUser.setRole(Roles.VERTRIEBLER_USER);
+                        System.out.println(addUser.getRole());
+                    }
+                    else{
+                        addUser.setRole(Roles.ENDKUNDE_USER);
+                        System.out.println(addUser.getRole());
+                    }
+
+
                     try {
                         UserDAO.getInstance().addUser(addUser);
-                    } catch (SQLException throwables) {
+                    } catch (SQLException | DatabaseException throwables) {
                         throwables.printStackTrace();
                     }
 
@@ -125,9 +146,7 @@ public class RegisterView extends VerticalLayout implements View {
     public void enter(ViewChangeListener.ViewChangeEvent event){
 
 
-
         this.setUp();
-
     }
 
 

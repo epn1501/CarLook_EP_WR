@@ -30,9 +30,9 @@ public class LoginControl{
             Statement statement = JDBCConnection.getInstance().getStatement();
             //set = statement.executeQuery("SELECT * FROM Carlook_SE2_EP-WR.Benutzer WHERE login = " + login + "...");
             set = statement.executeQuery("SELECT * " +
-                    "FROM carlookew.user " +
-                    "WHERE carlookew.user.login = \'" + login + "\'"
-                    + "AND carlookew.user.password = \'" + password + "\'");
+                    "FROM carlookwr.user " +
+                    "WHERE carlookwr.user.login = \'" + login + "\'"
+                    + "AND carlookwr.user.password = \'" + password + "\'");
 
 
         } catch (SQLException ex) {
@@ -53,8 +53,8 @@ public class LoginControl{
                 throw new NoSuchUserOrPassword();
             }
         }catch(SQLException ex){
-                Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         finally {
 
@@ -75,7 +75,7 @@ public class LoginControl{
     }
 
     public static void logoutUser(){
-        UI.getCurrent().getPage().setLocation("/CarLook_EP_WR");
+        UI.getCurrent().getPage().setLocation("/CarLook_WR");
         UI.getCurrent().getSession().close();
     }
 

@@ -3,7 +3,7 @@ package gui.windows;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.Widget;
-import com.sun.xml.internal.messaging.saaj.soap.impl.ElementFactory;
+
 import com.vaadin.client.widget.grid.RowReference;
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.event.*;
