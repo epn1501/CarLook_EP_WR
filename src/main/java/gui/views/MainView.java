@@ -81,7 +81,7 @@ public class MainView extends VerticalLayout implements View {
         setComponentAlignment(horizontalLayout, Alignment.BOTTOM_CENTER);
 
         Grid<Auto> grid = new Grid<>("Treffer");
-        grid.addColumn(Auto::getId).setCaption("ID");
+        grid.addColumn(Auto::getId).setCaption("ID").setMaximumWidth(70);
         grid.addColumn(Auto::getMarke).setCaption("Marke");
         grid.addColumn(Auto::getPs).setCaption("PS");
         grid.addColumn(Auto::getBaujahr).setCaption("Baujahr");
@@ -156,7 +156,6 @@ public class MainView extends VerticalLayout implements View {
                     List<Auto> liste = AutoSearch.getInstance().getAutoByMarke(marke);
                     grid.setItems(liste);
                     grid.setLocale(Locale.GERMANY);
-                    // grid.getColumn("ID").setMaximumWidth(70);
                     addComponent(reserviereButton);
                     setComponentAlignment(reserviereButton, Alignment.MIDDLE_CENTER);
                     MainView.this.anzahlSuche++;

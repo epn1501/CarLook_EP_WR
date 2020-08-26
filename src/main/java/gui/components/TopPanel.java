@@ -12,6 +12,7 @@ import model.objects.dto.Auto;
 import model.objects.dto.User;
 import process.control.LoginControl;
 import services.util.Roles;
+import services.util.Views;
 
 import java.sql.SQLException;
 
@@ -82,6 +83,8 @@ public class TopPanel extends HorizontalLayout {
                     // Todo: ein Window wird geöffnet um aktuelle Nachrichten/ Mitteilungen zu zeigen
                     NewsWindow window = new NewsWindow();
                     UI.getCurrent().addWindow(window);
+
+                    //UI.getCurrent().getNavigator().navigateTo(Views.MAINvertrieb);
                 }
             });
         }

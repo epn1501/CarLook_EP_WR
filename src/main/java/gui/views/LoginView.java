@@ -8,6 +8,7 @@ import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import gui.ui.MyUI;
 import gui.windows.HinzufuegenWindow;
 import model.objects.dto.User;
 import process.control.LoginControl;
@@ -108,14 +109,15 @@ public class LoginView extends VerticalLayout implements View {
     public void enter(ViewChangeListener.ViewChangeEvent event){
 
         User user = (User) VaadinSession.getCurrent().getAttribute(Roles.CURRENT_USER);
+
         if(user != null){
 
             UI.getCurrent().getNavigator().navigateTo(Views.MAIN);
         }
 
-        else if(user != null && user.hasRole(Roles.VERTRIEBLER_USER)){
-            UI.getCurrent().getNavigator().navigateTo(Views.MAINvertrieb);
-        }
+       // else if(user != null && user.hasRole(Roles.VERTRIEBLER_USER)){
+        //    UI.getCurrent().getNavigator().navigateTo(Views.MAINvertrieb);
+        //}
 
         else{
             this.setUp();

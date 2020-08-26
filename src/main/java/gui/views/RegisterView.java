@@ -96,11 +96,8 @@ public class RegisterView extends VerticalLayout implements View {
                     }
 
 
-                    try {
-                        UserDAO.getInstance().addUser(addUser);
-                    } catch (SQLException | DatabaseException throwables) {
-                        throwables.printStackTrace();
-                    }
+                    UserDAO.getInstance().createUser(addUser);
+                    //UserDAO.getInstance().addUser(addUser);
 
 
                     //System.out.println("Login1: " +login + " Passwort1: " + password + " " + addUser.getNachname() + "" + addUser.getVorname());

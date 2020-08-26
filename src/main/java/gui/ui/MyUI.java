@@ -52,7 +52,7 @@ public class MyUI extends UI {
         navi.addView (Views.MAIN, MainView.class);
         navi.addView (Views.LOGIN, LoginView.class);
         navi.addView (Views.REGISTER, RegisterView.class);
-        navi.addView(Views.MAINvertrieb, MainViewVertrieb.class);
+        navi.addView (Views.MAINvertrieb, MainViewVertrieb.class);
 
         this.user = (User) VaadinSession.getCurrent().getAttribute(Roles.CURRENT_USER);
 

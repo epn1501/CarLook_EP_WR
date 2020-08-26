@@ -20,6 +20,14 @@ public class Auto implements  java.io.Serializable {
         this.description = description;
     }
 
+    public Auto(String marke, int ps, int baujahr, String description) {
+        this.marke = marke;
+        this.ps = ps;
+        this.baujahr = baujahr;
+        this.description = description;
+
+    }
+
     public Integer getId(){
         return id;
     }

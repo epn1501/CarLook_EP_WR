@@ -2,21 +2,33 @@ package gui.views;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.FontAwesome;
+import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
+import gui.components.TopPanel;
 import model.objects.dto.Auto;
+import model.objects.dto.User;
 import process.control.AutoSearch;
+import process.control.LoginControl;
+import services.util.Roles;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class MainViewVertrieb extends VerticalLayout implements View {
+    public static final String CLASSNAME = "VERTRIEBMAIN";
 
     public void setUp(){
 
             this.setSizeFull();
 
+           // this.addComponent(new TopPanel());
+           // this.addComponent(new Label ("<hr/>", ContentMode.HTML)); //Linie
+
+            setMargin(true);
 
             VerticalLayout content = new VerticalLayout();
+
 
 
             List<Auto> liste = AutoSearch.getInstance().getAutoAll();
@@ -38,11 +50,8 @@ public class MainViewVertrieb extends VerticalLayout implements View {
             grid.getDataCommunicator().fetchItemsWithRange(0, grid.getDataCommunicator().getDataProviderSize());
 
 
-
-
-
-            content.addComponent(grid);
-            content.setMargin(true);
+              content.addComponent(grid);
+          //  content.setMargin(true);
 
 
             Button add = new Button("Add");
@@ -59,7 +68,7 @@ public class MainViewVertrieb extends VerticalLayout implements View {
             content.setComponentAlignment(add, Alignment.MIDDLE_CENTER);
 
 
-
+            this.addComponent(content);
 
 
     }
@@ -68,8 +77,6 @@ public class MainViewVertrieb extends VerticalLayout implements View {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event){
-
-
         this.setUp();
     }
 }

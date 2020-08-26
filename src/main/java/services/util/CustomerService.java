@@ -3,10 +3,12 @@ package services.util;
 import model.objects.dto.Auto;
 import model.objects.dto.NeueListeAuto;
 import model.objects.dto.User;
+import process.control.exceptions.DatabaseException;
 import services.db.JDBCConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
@@ -49,22 +51,23 @@ public class CustomerService {
     }
         */
 
+    /*
+        public void updateUser(User user) {
 
-    public void updateUser(User user) {
+            try {
+                PreparedStatement statement = JDBCConnection.getInstance().getPreparedStatement("INSERT INTO carlookwr.user " +
+                                "(login, password, vorname, nachname) VALUES (?,?,?,?, default)");
+                statement.executeUpdate(user.getLogin());
+                statement.executeUpdate(user.getPasswort());
+                statement.executeUpdate(user.getVorname());
+                statement.executeUpdate(user.getNachname());
+            } catch (Exception e) {
+                System.err.println("Got an exception! ");
+                System.err.println(e.getMessage());
+            }
 
-        try {
-            PreparedStatement statement = JDBCConnection.getInstance().getPreparedStatement("INSERT INTO carlookwr.user " +
-                            "(login, password, vorname, nachname) VALUES (?,?,?,?, default)");
-            statement.executeUpdate(user.getLogin());
-            statement.executeUpdate(user.getPasswort());
-            statement.executeUpdate(user.getVorname());
-            statement.executeUpdate(user.getNachname());
-        } catch (Exception e) {
-            System.err.println("Got an exception! ");
-            System.err.println(e.getMessage());
         }
-
-    }
+    */
 
 
 

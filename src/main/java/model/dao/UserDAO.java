@@ -124,27 +124,40 @@ public class UserDAO extends AbstractDAO {
         return null;
     }
 
-    /*
-    public boolean createUser(String login, String passwort, String vorname, String nachname) throws SQLException {
 
+    public boolean createUser(User user)  {
 
-            String query = " insert into carlookwr.user (login, password, vorname, nachname) values (?,?,?,?, default)";
-            PreparedStatement statement = this.getPreparedStatement(query);
+        String sql = "INSERT INTO carlookwr.user (login, password, vorname, nachname, userid) VALUES (?, ?, ?, ?, default)";
+        PreparedStatement stm = this.getPreparedStatement(sql);
+        ResultSet rs = null;
 
-            statement.setString(1, getLogin());
-            statement.setString(2, getPassword());
-            statement.setString(3, getVorname());
-            statement.setString(4, getNachname());
+        try{
 
-            statement.execute();
+            stm.setString(1, user.getLogin());
+            stm.setString(2, user.getPasswort());
+            stm.setString(3, user.getVorname());
+            stm.setString(4, user.getNachname());
+            int rowsChanged = stm.executeUpdate();
+            if(rowsChanged == 0){
+                throw  new SQLException("Creating user failed");
+            }
+            rs = stm.getGeneratedKeys();
+
 
             return true;
 
+        }catch (SQLException ex){
+            System.err.println("Got an exception! ");
+            System.err.println(ex.getMessage());
+            return false;
+        }finally {
+            closeResultset(rs);
+        }
 
     }
-    */
 
 
+    /*
     public void addUser(User user) throws SQLException, DatabaseException {
 
         CustomerService service = new CustomerService();
@@ -153,7 +166,7 @@ public class UserDAO extends AbstractDAO {
         System.out.println("User Login: " + user.getLogin()+ " User Passwort:  " + user.getPasswort());
 
     }
-
+        */
 
 
 

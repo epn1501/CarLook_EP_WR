@@ -29,8 +29,14 @@ public class RegisterControl {
 
          boolean result = UserDAO.getInstance().createUser(login, passwort, vorname, nachname);
          return result;
+    }*/
+
+    public static boolean registerUser(User user) throws DatabaseException, SQLException{
+        boolean result = UserDAO.getInstance().createUser(user);
+        return result;
     }
-    */
+
+
 
 
 

@@ -1,14 +1,19 @@
 package gui.windows;
 
+import com.vaadin.data.Binder;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.components.grid.Editor;
 import com.vaadin.ui.components.grid.ItemClickListener;
+import com.vaadin.ui.renderers.NumberRenderer;
 import model.objects.dto.Auto;
 
 import java.awt.*;
+import java.awt.TextField;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.vaadin.ui.*;
 import model.objects.dto.NeueListeAuto;
@@ -25,6 +30,8 @@ public class HinzufuegenWindow extends Window {
         VerticalLayout content = new VerticalLayout();
 
 
+
+
     /*
         Auto autos = new Auto();
         autos.setId(100);
@@ -35,14 +42,17 @@ public class HinzufuegenWindow extends Window {
 */
 
         List<Auto> liste = AutoSearch.getInstance().getAutoAll();
-
-
         Grid<Auto> grid = new Grid<>("Liste aller Autos");
-        grid.addColumn(Auto::getId).setCaption("ID");
+        grid.addColumn(Auto::getId).setCaption("ID").setMaximumWidth(70);
         grid.addColumn(Auto::getMarke).setCaption("Marke");
         grid.addColumn(Auto::getPs).setCaption("PS");
         grid.addColumn(Auto::getBaujahr).setCaption("Baujahr");
         grid.addColumn(Auto::getDescription).setCaption("Description");
+
+        //Changing the local affects
+        grid.setLocale(Locale.GERMANY);
+
+
 
         grid.setItems(liste);
         grid.setSizeFull();
@@ -50,28 +60,40 @@ public class HinzufuegenWindow extends Window {
         // new feature goind into vaadin: column reordering
         grid.setColumnReorderingAllowed(true);
 
-        grid.getDataCommunicator().fetchItemsWithRange(0, grid.getDataCommunicator().getDataProviderSize());
-
-
-
-
+        //grid.getDataCommunicator().fetchItemsWithRange(0, grid.getDataCommunicator().getDataProviderSize());
 
         content.addComponent(grid);
         content.setMargin(true);
         setContent(content);
         setClosable(true);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         Button add = new Button("Add");
         add.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
+
                 Notification.show("Ein neues Auto Objekt wurde Hinzugefügt!");
             }
         });
 
         content.setSizeFull();
 
-        content.addComponent(add);
+        content.addComponents( add);
         content.setComponentAlignment(add, Alignment.MIDDLE_CENTER);
 
 
