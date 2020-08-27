@@ -75,7 +75,7 @@ public class RegisterView extends VerticalLayout implements View {
                 //ToDo-Bedingung für MAIN, FELDER müssen korrekt ausgefüllt sein
                 else {
 
-                    String s = login;
+                   String s = login;
 
                     User addUser = new User();
                     addUser.setLogin(login);

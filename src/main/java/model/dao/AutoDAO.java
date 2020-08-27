@@ -5,6 +5,7 @@ import process.control.exceptions.DatabaseException;
 import services.db.JDBCConnection;
 
 import javax.swing.plaf.nimbus.State;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -122,6 +123,35 @@ public class AutoDAO extends AbstractDAO{
         }
         return liste;
 
+
+    }
+
+
+
+    public boolean createAuto(Auto auto){
+
+        String sql = "INSERT INTO carlookwr.autos (auto_id, marke, ps, baujahr, description) VALUES (default, ?, ?, ?, ?)";
+        PreparedStatement statement = this.getPreparedStatement(sql);
+        ResultSet rs = null;
+
+        try{
+            statement.setString(1, auto.getMarke());
+            statement.setInt(2, auto.getPs());
+            statement.setInt(3, auto.getBaujahr());
+            statement.setString(4, auto.getDescription());
+            int rowsChanged = statement.executeUpdate();
+            if(rowsChanged == 0){
+                throw new SQLException("Creating auto failed");
+            }
+            rs = statement.getGeneratedKeys();
+            return true;
+        }catch (SQLException ex){
+            System.err.println("Got an exception! ");
+            System.err.println(ex.getMessage());
+            return false;
+        }finally {
+            closeResultset(rs);
+        }
 
     }
 

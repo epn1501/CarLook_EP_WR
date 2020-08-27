@@ -65,7 +65,7 @@ public class TopPanel extends HorizontalLayout {
 
         //Liste der Reservierungen -> Cancle
         if(user.hasRole (Roles.ADMIN )  || user.hasRole(Roles.ENDKUNDE_USER) ) {
-            item1.addItem("Reservierungen", FontAwesome.LIST, new MenuBar.Command() {
+            item1.addItem("Reservierungen", FontAwesome.CHECK_CIRCLE_O, new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
 
