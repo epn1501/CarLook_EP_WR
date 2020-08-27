@@ -9,16 +9,17 @@ import gui.windows.HinzufuegenWindow;
 import gui.windows.NewsWindow;
 import gui.windows.ReservierungsWindow;
 import model.objects.dto.Auto;
+import model.objects.dto.NeueListe;
 import model.objects.dto.User;
 import process.control.LoginControl;
 import services.util.Roles;
-import services.util.Views;
 
 import java.sql.SQLException;
 
 public class TopPanel extends HorizontalLayout {
     public static final String CLASSNAME = "TOPPANEL";
     private Auto autoSelection = null;
+    private NeueListe neueListeSelection = null;
 
     public TopPanel(){
 
@@ -67,7 +68,15 @@ public class TopPanel extends HorizontalLayout {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
 
-                    ReservierungsWindow window = new ReservierungsWindow(TopPanel.this.autoSelection);
+                    ReservierungsWindow window = null;
+                    try {
+                        window = new ReservierungsWindow(TopPanel.this.neueListeSelection);
+                        window.setWidth("70%");
+                        window.setHeight("70%");
+                        window.center();
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                     UI.getCurrent().addWindow(window);
 
                 }

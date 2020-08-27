@@ -65,7 +65,7 @@ public class RoleDAO extends AbstractDAO{
         try {
             while (rs.next()) {
                 role = new Role();
-                //liest 2 Spalte aus
+                //liest 2 Spalte aus -> Rolle
                 role.setBezeichnung(rs.getString(2));
                 liste.add(role);
             }

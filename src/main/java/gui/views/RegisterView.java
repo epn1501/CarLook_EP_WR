@@ -100,7 +100,7 @@ public class RegisterView extends VerticalLayout implements View {
                     //UserDAO.getInstance().addUser(addUser);
 
 
-                    //System.out.println("Login1: " +login + " Passwort1: " + password + " " + addUser.getNachname() + "" + addUser.getVorname());
+                    System.out.println("Login: " +login + " Passwort: " + password + " " + addUser.getNachname() + "" + addUser.getVorname());
 
                     ConfirmationWindow window = new ConfirmationWindow("User wurde erstellt. Sie können sich jetzt einloggen!");
                     UI.getCurrent().addWindow(window);

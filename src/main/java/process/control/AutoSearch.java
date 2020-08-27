@@ -2,8 +2,6 @@ package process.control;
 
 import model.dao.AutoDAO;
 import model.objects.dto.Auto;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class AutoSearch {
@@ -62,6 +60,7 @@ public class AutoSearch {
     }
 
     public List<Auto> getAutoAll (){
+
         return AutoDAO.getInstance().getAutoByAll();
     }
 

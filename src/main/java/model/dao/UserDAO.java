@@ -1,16 +1,11 @@
 package model.dao;
 
-import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.UI;
-import gui.ui.MyUI;
 import model.objects.dto.User;
 import process.control.LoginControl;
 import process.control.exceptions.DatabaseException;
 import services.db.JDBCConnection;
-import services.util.CustomerService;
 import services.util.Roles;
 
-import java.net.PasswordAuthentication;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -157,16 +152,6 @@ public class UserDAO extends AbstractDAO {
     }
 
 
-    /*
-    public void addUser(User user) throws SQLException, DatabaseException {
-
-        CustomerService service = new CustomerService();
-        service.updateUser(user);
-
-        System.out.println("User Login: " + user.getLogin()+ " User Passwort:  " + user.getPasswort());
-
-    }
-        */
 
 
 

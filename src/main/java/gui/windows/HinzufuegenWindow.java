@@ -1,22 +1,14 @@
 package gui.windows;
 
-import com.vaadin.data.Binder;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Window;
-import com.vaadin.ui.components.grid.Editor;
-import com.vaadin.ui.components.grid.ItemClickListener;
-import com.vaadin.ui.renderers.NumberRenderer;
 import model.objects.dto.Auto;
 
-import java.awt.*;
-import java.awt.TextField;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import com.vaadin.ui.*;
-import model.objects.dto.NeueListeAuto;
 import process.control.AutoSearch;
 
 public class HinzufuegenWindow extends Window {
@@ -66,20 +58,6 @@ public class HinzufuegenWindow extends Window {
         content.setMargin(true);
         setContent(content);
         setClosable(true);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         Button add = new Button("Add");

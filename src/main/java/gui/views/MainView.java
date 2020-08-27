@@ -4,7 +4,6 @@ import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
@@ -12,25 +11,17 @@ import com.vaadin.ui.components.grid.ItemClickListener;
 
 
 import gui.components.TopPanel;
-import gui.windows.ReservierungsWindow;
 import  model.objects.dto.Auto;
-import model.objects.dto.NeueListeAuto;
+import model.objects.dto.NeueListe;
 import model.objects.dto.User;
 import  process.control.AutoSearch;
 
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import com.vaadin.ui.components.grid.*;
-import process.control.exceptions.DatabaseException;
-import services.db.JDBCConnection;
+
 import services.util.Roles;
 import services.util.Views;
-
-import javax.management.relation.Role;
 
 public class MainView extends VerticalLayout implements View {
 
@@ -101,7 +92,7 @@ public class MainView extends VerticalLayout implements View {
                 Notification.show("Das Auto mit der ID: " + selection.getValue().getId()+ " wurde reserviert!");
                 //System.out.println("Auto selektiert: " + MainView.this.autoSelektiert.getMarke());
 
-               NeueListeAuto neueListe = new NeueListeAuto();
+               NeueListe neueListe = new NeueListe();
                neueListe.setId(selection.getValue().getId());
                neueListe.setMarke(selection.getValue().getMarke());
                neueListe.setPs(selection.getValue().getPs());

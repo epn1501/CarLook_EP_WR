@@ -1,7 +1,6 @@
 package model.dao;
 
-import model.objects.dto.Auto;
-import model.objects.dto.NeueListeAuto;
+import model.objects.dto.NeueListe;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,15 +24,14 @@ public class NeueListeDAO extends AbstractDAO {
         return dao;
     }
 
-
+    /*
     public List<NeueListeAuto> getAutoById (String marke){
         Statement statement = this.getStatement();
         ResultSet rs = null;
 
         try{
             rs = statement.executeQuery("SELECT *"
-                    + "FROM carlookew.neueListe "
-                    + "WHERE carlookew.neueListe.marke = \'" + marke + "\'");
+                    + "FROM carlookew.neueListe ");
         }catch (SQLException ex){
 
         }
@@ -54,6 +52,44 @@ public class NeueListeDAO extends AbstractDAO {
                 neueListeAuto.setBaujahr(rs.getInt(4));
                 neueListeAuto.setDescription(rs.getString(5));
                 liste.add(neueListeAuto);
+            }
+        }catch (SQLException ex){
+
+        }
+        return liste;
+
+    }
+    */
+
+    public List<NeueListe> getNeueListeByAll(){
+
+        Statement statement = this.getStatement();
+
+        ResultSet rs = null;
+
+        try{
+            rs = statement.executeQuery("SELECT *"
+                    + "FROM carlookwr.neueliste ");
+        }catch (SQLException ex){
+
+        }
+
+        if( rs == null ){
+            return null;
+        }
+
+        List<NeueListe> liste = new ArrayList<NeueListe>();
+        NeueListe neueListe = null;
+
+        try{
+            while (rs.next()){
+                neueListe = new NeueListe();
+                neueListe.setId(rs.getInt(1));
+                neueListe.setMarke(rs.getString(2));
+                neueListe.setPs(rs.getInt(3));
+                neueListe.setBaujahr(rs.getInt(4));
+                neueListe.setDescription(rs.getString(5));
+                liste.add(neueListe);
             }
         }catch (SQLException ex){
 
