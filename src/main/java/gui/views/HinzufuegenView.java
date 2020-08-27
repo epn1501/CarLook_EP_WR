@@ -75,8 +75,9 @@ public class HinzufuegenView extends VerticalLayout implements View {
 
 
                 System.out.println("Marke: " + marke + " PS: " + psZahl + " " + neuAuto.getBaujahr() + " " + neuAuto.getDescription() );
-                ConfirmationWindow window = new ConfirmationWindow("Neues Auto wurde hinzugefügt!");
-                //UI.getCurrent().getNavigator().navigateTo(Views.MAIN);
+                //ConfirmationWindow window = new ConfirmationWindow("Neues Auto wurde hinzugefügt!");
+                UI.getCurrent().getNavigator().navigateTo(Views.MAIN);
+                Notification.show("Neues Auto wurde hinzugefügt!");
             }
         });
 
