@@ -12,10 +12,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
-import gui.views.LoginView;
-import gui.views.MainView;
-import gui.views.MainViewVertrieb;
-import gui.views.RegisterView;
+import gui.views.*;
 import model.dao.UserDAO;
 import model.objects.dto.User;
 import services.util.Roles;
@@ -53,6 +50,7 @@ public class MyUI extends UI {
         navi.addView (Views.LOGIN, LoginView.class);
         navi.addView (Views.REGISTER, RegisterView.class);
         navi.addView (Views.MAINvertrieb, MainViewVertrieb.class);
+        navi.addView (Views.HINZUFÜGEN, HizufuegenView.class);
 
         this.user = (User) VaadinSession.getCurrent().getAttribute(Roles.CURRENT_USER);
 

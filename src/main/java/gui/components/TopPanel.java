@@ -13,6 +13,7 @@ import model.objects.dto.NeueListe;
 import model.objects.dto.User;
 import process.control.LoginControl;
 import services.util.Roles;
+import services.util.Views;
 
 import java.sql.SQLException;
 
@@ -84,16 +85,24 @@ public class TopPanel extends HorizontalLayout {
         }
 
         // News window
-        if(user.hasRole (Roles.ADMIN) || user.hasRole(Roles.ENDKUNDE_USER) || user.hasRole(Roles.VERTRIEBLER_USER) ) {
+        if(user.hasRole (Roles.ADMIN)  || user.hasRole(Roles.VERTRIEBLER_USER) ) {
 
-            item1.addItem("Nachrichten", FontAwesome.NEWSPAPER_O, new MenuBar.Command() {
+            item1.addItem("Liste", FontAwesome.LIST, new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
                     // Todo: ein Window wird geöffnet um aktuelle Nachrichten/ Mitteilungen zu zeigen
-                    NewsWindow window = new NewsWindow();
-                    UI.getCurrent().addWindow(window);
 
-                    //UI.getCurrent().getNavigator().navigateTo(Views.MAINvertrieb);
+                    HinzufuegenWindow window = null;
+
+                    try {
+                        window = new HinzufuegenWindow(TopPanel.this.autoSelection);
+                        window.setWidth("70%");
+                        window.setHeight("70%");
+                        window.center();
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    UI.getCurrent().addWindow(window);
                 }
             });
         }
@@ -106,11 +115,9 @@ public class TopPanel extends HorizontalLayout {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
                     // Todo: ein Window wird geöffnet... Hinzufügen von neuen Autos
+                    UI.getCurrent().getNavigator().navigateTo(Views.HINZUFÜGEN);
+                    /*
                     HinzufuegenWindow window = null;
-
-
-
-
                     try {
                         window = new HinzufuegenWindow(TopPanel.this.autoSelection);
                         window.setWidth("70%");
@@ -120,6 +127,7 @@ public class TopPanel extends HorizontalLayout {
                         throwables.printStackTrace();
                     }
                     UI.getCurrent().addWindow(window);
+                    */
                 }
             });
         }

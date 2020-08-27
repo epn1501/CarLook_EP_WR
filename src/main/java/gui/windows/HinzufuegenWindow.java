@@ -1,5 +1,7 @@
 package gui.windows;
 
+import com.vaadin.navigator.View;
+import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Window;
 import model.objects.dto.Auto;
@@ -10,6 +12,7 @@ import java.util.Locale;
 
 import com.vaadin.ui.*;
 import process.control.AutoSearch;
+import services.util.Views;
 
 public class HinzufuegenWindow extends Window {
 
@@ -49,6 +52,8 @@ public class HinzufuegenWindow extends Window {
         grid.setItems(liste);
         grid.setSizeFull();
 
+
+
         // new feature goind into vaadin: column reordering
         grid.setColumnReorderingAllowed(true);
 
@@ -60,19 +65,24 @@ public class HinzufuegenWindow extends Window {
         setClosable(true);
 
 
+        /*
         Button add = new Button("Add");
         add.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
 
-                Notification.show("Ein neues Auto Objekt wurde Hinzugefügt!");
+                //Notification.show("Ein neues Auto Objekt wurde Hinzugefügt!");
+                UI.getCurrent().getNavigator().navigateTo(Views.HINZUFÜGEN);
+                close();
             }
         });
+        */
 
+       // content.addComponent(add);
+       // content.setComponentAlignment(add, Alignment.MIDDLE_CENTER);
         content.setSizeFull();
 
-        content.addComponents( add);
-        content.setComponentAlignment(add, Alignment.MIDDLE_CENTER);
+
 
 
 
