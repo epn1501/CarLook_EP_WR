@@ -23,7 +23,7 @@ public class ReservierungsWindow extends Window {
         int random =(int) (Math.random()*100);
         VerticalLayout content = new VerticalLayout();
 
-
+        /*
         NeueListe liste = new NeueListe();
         liste.setId(99);
         //liste.setId();
@@ -31,7 +31,7 @@ public class ReservierungsWindow extends Window {
         liste.setPs(120);
         liste.setBaujahr(1990);
         liste.setDescription("Guter Zustand");
-
+        */
         /*
         NeueListeAuto liste2 = new NeueListeAuto();
         liste.setId(100);
@@ -42,7 +42,7 @@ public class ReservierungsWindow extends Window {
         liste.setDescription("Sportliche Ausstattung");
         */
 
-        //List<NeueListe> liste = NeueListeSearch.getInstance().getNeueListeAll();
+        List<NeueListe> liste = NeueListeSearch.getInstance().getNeueListeAll();
         Grid<NeueListe> grid = new Grid<>("Auswahl");
         grid.addColumn(NeueListe::getId).setCaption("ID").setMaximumWidth(70);
         grid.addColumn(NeueListe::getMarke).setCaption("Marke");

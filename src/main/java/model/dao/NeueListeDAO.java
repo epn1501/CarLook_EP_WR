@@ -2,6 +2,7 @@ package model.dao;
 
 import model.objects.dto.NeueListe;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -96,6 +97,33 @@ public class NeueListeDAO extends AbstractDAO {
         }
         return liste;
 
+    }
+
+
+    public boolean createNeueListe (NeueListe neueListe){
+        String sql = "INSERT INTO carlookwr.neueliste (auto_id, marke, ps, baujahr, description) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement statement = this.getPreparedStatement(sql);
+        ResultSet rs = null;
+
+        try{
+            statement.setInt(1, neueListe.getId());
+            statement.setString(2, neueListe.getMarke());
+            statement.setInt(3, neueListe.getPs());
+            statement.setInt(4, neueListe.getBaujahr());
+            statement.setString(5, neueListe.getDescription());
+            int rowsChanged = statement.executeUpdate();
+            if(rowsChanged == 0){
+                throw new SQLException("Creating neueliste failed");
+            }
+            rs = statement.getGeneratedKeys();
+            return true;
+        }catch (SQLException ex){
+            System.err.println("Got an exception! ");
+            System.err.println(ex.getMessage());
+            return false;
+        }finally {
+            closeResultset(rs);
+        }
 
     }
 

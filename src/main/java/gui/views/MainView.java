@@ -11,6 +11,7 @@ import com.vaadin.ui.components.grid.ItemClickListener;
 
 
 import gui.components.TopPanel;
+import model.dao.NeueListeDAO;
 import  model.objects.dto.Auto;
 import model.objects.dto.NeueListe;
 import model.objects.dto.User;
@@ -104,25 +105,7 @@ public class MainView extends VerticalLayout implements View {
                System.out.println(selection.getValue().getDescription());
                System.out.println(selection.getValue().getBaujahr());
 
-               /*
-               String sql = "INSERT INTO carlookew.neueListe VALUES (?,?,?,?,?)";
-               try {
-                   PreparedStatement statement = JDBCConnection.getInstance().getPreparedStatement(sql);
-
-                   statement.setInt(1, selection.getValue().getId());
-                   statement.setString(2, selection.getValue().getMarke());
-                   statement.setInt(3, selection.getValue().getPs());
-                   statement.setInt(4, selection.getValue().getBaujahr());
-                   statement.setString(5, selection.getValue().getDescription());
-
-                   statement.executeUpdate();
-
-
-               } catch (DatabaseException | SQLException exception) {
-                   exception.printStackTrace();
-               }
-
-                */
+               NeueListeDAO.getInstance().createNeueListe(neueListe);
 
            }
         });
