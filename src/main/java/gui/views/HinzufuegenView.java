@@ -73,9 +73,13 @@ public class HinzufuegenView extends VerticalLayout implements View {
 
         Button buttonZurueck = new Button("Zurück", FontAwesome.ARROW_LEFT);
         buttonZurueck.addClickListener(event -> UI.getCurrent().getNavigator().navigateTo(Views.MAIN));
-        layout.addComponents(buttonZurueck, hinzufuegen);
-        layout.setComponentAlignment(buttonZurueck, Alignment.BOTTOM_LEFT);
 
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout.addComponents(buttonZurueck, hinzufuegen);
+
+        layout.addComponent(label);
+        layout.addComponent(horizontalLayout);
+        layout.setComponentAlignment(horizontalLayout, Alignment.MIDDLE_CENTER);
 
         Panel panel = new Panel("Neue Autos hinzufügen");
         panel.setStyleName("addView");

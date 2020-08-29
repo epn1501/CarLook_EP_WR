@@ -116,11 +116,23 @@ public class RegisterView extends VerticalLayout implements View {
         // layout.addComponent(buttonRegister);
         Button buttonZurueck = new Button("Zurück", FontAwesome.ARROW_LEFT);
         buttonZurueck.addClickListener(event -> UI.getCurrent().getNavigator().navigateTo(Views.LOGIN));
-        layout.addComponents(buttonZurueck, buttonRegister);
+        //layout.addComponents(buttonZurueck, buttonRegister);
         // layout.setComponentAlignment(buttonZurueck, Alignment.BOTTOM_LEFT);
         // layout.setComponentAlignment(buttonRegister, Alignment.BOTTOM_RIGHT);
         //layout.addComponents(buttonZurueck, buttonRegister);
-        layout.setComponentAlignment(buttonZurueck, Alignment.BOTTOM_LEFT);
+        //layout.setComponentAlignment(buttonZurueck, Alignment.BOTTOM_LEFT);
+
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout.addComponents(buttonZurueck, buttonRegister);
+
+        layout.addComponent(label);
+
+        layout.addComponent(horizontalLayout);
+        layout.setComponentAlignment(horizontalLayout, Alignment.MIDDLE_CENTER);
+
+
+
+
 
         Panel panel = new Panel("Jetzt registrieren - gratis in nur 2 Minuten!");
         panel.addStyleName("register");

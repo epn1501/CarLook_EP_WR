@@ -3,10 +3,13 @@ package gui.windows;
 
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.ui.*;
+import model.dao.NeueListeDAO;
 import model.objects.dto.NeueListe;
+import org.atmosphere.interceptor.AtmosphereResourceStateRecovery;
 import process.control.NeueListeSearch;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Window;
+import services.util.Views;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -20,8 +23,11 @@ public class ReservierungsWindow extends Window {
         super("Reservierungsliste");
         center();
 
+
+
         int random =(int) (Math.random()*100);
         VerticalLayout content = new VerticalLayout();
+
 
         /*
         NeueListe liste = new NeueListe();
@@ -49,10 +55,8 @@ public class ReservierungsWindow extends Window {
         grid.addColumn(NeueListe::getPs).setCaption("PS");
         grid.addColumn(NeueListe::getBaujahr).setCaption("Baujahr");
         grid.addColumn(NeueListe::getDescription).setCaption("Description");
-
         // new feature goind into vaadin: column reordering
         grid.setColumnReorderingAllowed(true);
-
         grid.setItems(liste);
         grid.setSizeFull();
 
@@ -61,53 +65,63 @@ public class ReservierungsWindow extends Window {
         setContent(content);
         setClosable(true);
 
-        Button auswahl = new Button("Reservieren");
+        SingleSelect<NeueListe> selection = grid.asSingleSelect();
 
-        //Muilit-Selection1
-        grid.setSelectionMode(Grid.SelectionMode.MULTI);
-        grid.addSelectionListener(event -> {
-            Set<NeueListe> selected = event.getAllSelectedItems();
-            // Notification.show("Auto mit der ID: " + liste+ " ausgewählt!");
-            auswahl.setCaption("Delete!");
-            auswahl.addClickListener(new Button.ClickListener() {
-                @Override
-                public void buttonClick(Button.ClickEvent event) {
-                    Notification.show("Selektion wurde gelöscht");
-                }
-            });
-            auswahl.addClickListener(new Button.ClickListener() {
-                @Override
-                public void buttonClick(Button.ClickEvent event) {
-                    auswahl.setCaption("Reservieren!");
-                    //Notification.show("Die Reservierung wurde versendet!");
-                }
-            });
-        });
 
-        MultiSelect<NeueListe> selection = grid.asMultiSelect();
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
 
-        auswahl.addClickListener(new Button.ClickListener() {
+        //Button für die Reservierung der Selektion in der Reservierungsliste
+        Button reservieren = new Button("Reservieren");
+        reservieren.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
 
-                if(selection.isEmpty()){
-                    //test.setCaption("Reservieren!");
-                    Notification.show("Die Reservierung wurde mit der Nummer: " + random +" versendet!");
+                if(selection.isEmpty()) {
+                    Notification.show("Die Reservierung wurde versendet! Ihre Reservierungsnr.: " + random);
+                    System.out.println("Die Reservierung wurde versendet! Ihre Reservierungsnr.: " + random);
                     close();
                 }
-                else {
-                    ListDataProvider<NeueListe> dataProvider = (ListDataProvider<NeueListe>) grid.getDataProvider();
-                    dataProvider.getItems().remove(liste);
-                    dataProvider.refreshAll();
-                    Notification.show("Selektion wurde gelöscht");
-                    //close();
+                else{
+                    //Notification.show("Das Auto mit der ID: " + selection.getValue().getId() + " wurde mit der Reservierungsnr: " + random +" reserviert!");
+                    System.out.println("Das Auto mit der ID: " + selection.getValue().getId() + " wurde ausgewählt!");
                 }
             }
         });
 
+
+        //Button für die Löschung der Selektion in der Reservierungsliste
+        Button delete = new Button("Delete");
+        delete.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+
+                if(!selection.isEmpty()){
+
+                    ListDataProvider<NeueListe> dataProvider = (ListDataProvider<NeueListe>) grid.getDataProvider();
+                    dataProvider.getItems().remove(liste);
+                    dataProvider.refreshAll();
+                    grid.getDataProvider().refreshAll();
+
+                    NeueListeDAO.getInstance().deleteNeueListe(selection.getValue().getId());
+
+                    Notification.show("Das Auto mit der ID: " + selection.getValue().getId() + " wurde gelöscht!");
+                    System.out.println("Das Auto mit der ID: " + selection.getValue().getId() + " wurde gelöscht!");
+                    close();
+
+
+                }
+                else {
+                    System.out.println("Der Deletebutton wurde betätigt!");
+                }
+            }
+        });
+
+
+
+        horizontalLayout.addComponents(delete, reservieren);
         content.setSizeFull();
-        content.addComponent(auswahl);
-        content.setComponentAlignment(auswahl, Alignment.MIDDLE_CENTER);
+        content.addComponent(horizontalLayout);
+        content.setComponentAlignment(horizontalLayout, Alignment.MIDDLE_CENTER);
 
 
     }

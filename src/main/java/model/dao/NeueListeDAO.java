@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class NeueListeDAO extends AbstractDAO {
 
@@ -126,5 +127,25 @@ public class NeueListeDAO extends AbstractDAO {
         }
 
     }
+
+
+    public void deleteNeueListe(Integer id) {
+
+        Statement statement = this.getStatement();
+
+        try {
+
+            statement.execute("DELETE FROM carlookwr.neueliste WHERE carlookwr.neueliste.auto_id = \'" + id + "\';");
+
+
+        } catch (SQLException ex) {
+            System.err.println("Got an exception! ");
+            System.err.println(ex.getMessage());
+
+        }
+
+    }
+
+
 
 }
