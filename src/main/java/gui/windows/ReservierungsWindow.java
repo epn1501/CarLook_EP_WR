@@ -29,24 +29,7 @@ public class ReservierungsWindow extends Window {
         VerticalLayout content = new VerticalLayout();
 
 
-        /*
-        NeueListe liste = new NeueListe();
-        liste.setId(99);
-        //liste.setId();
-        liste.setMarke("Honda");
-        liste.setPs(120);
-        liste.setBaujahr(1990);
-        liste.setDescription("Guter Zustand");
-        */
-        /*
-        NeueListeAuto liste2 = new NeueListeAuto();
-        liste.setId(100);
-        //liste.setId();
-        liste.setMarke("Jaguar");
-        liste.setPs(320);
-        liste.setBaujahr(2015);
-        liste.setDescription("Sportliche Ausstattung");
-        */
+
 
         List<NeueListe> liste = NeueListeSearch.getInstance().getNeueListeAll();
         Grid<NeueListe> grid = new Grid<>("Auswahl");
@@ -55,8 +38,10 @@ public class ReservierungsWindow extends Window {
         grid.addColumn(NeueListe::getPs).setCaption("PS");
         grid.addColumn(NeueListe::getBaujahr).setCaption("Baujahr");
         grid.addColumn(NeueListe::getDescription).setCaption("Description");
+
         // new feature goind into vaadin: column reordering
         grid.setColumnReorderingAllowed(true);
+
         grid.setItems(liste);
         grid.setSizeFull();
 
@@ -66,7 +51,6 @@ public class ReservierungsWindow extends Window {
         setClosable(true);
 
         SingleSelect<NeueListe> selection = grid.asSingleSelect();
-
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
 

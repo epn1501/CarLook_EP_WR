@@ -74,6 +74,8 @@ public class HinzufuegenView extends VerticalLayout implements View {
         Button buttonZurueck = new Button("Zurück", FontAwesome.ARROW_LEFT);
         buttonZurueck.addClickListener(event -> UI.getCurrent().getNavigator().navigateTo(Views.MAIN));
 
+
+
         HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.addComponents(buttonZurueck, hinzufuegen);
 
@@ -95,7 +97,6 @@ public class HinzufuegenView extends VerticalLayout implements View {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event){
-
         this.setUp();
     }
 

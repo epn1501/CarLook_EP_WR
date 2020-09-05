@@ -46,7 +46,7 @@ public class MainView extends VerticalLayout implements View {
     public void setUp(){
 
         this.addComponent( new TopPanel());
-        this.addComponent(new Label ("<hr/>", ContentMode.HTML)); //Linie
+        //this.addComponent(new Label ("<hr/>", ContentMode.HTML)); //Linie
 
         setMargin(true);
 
@@ -83,7 +83,7 @@ public class MainView extends VerticalLayout implements View {
         SingleSelect<Auto> selection = grid.asSingleSelect();
 
 
-        Button reserviereButton = new Button("Reservieren", (Button.ClickListener) clickEvent -> {
+        Button reserviereButton = new Button("Zur Reservierung hinzufügen", (Button.ClickListener) clickEvent -> {
            if(selection.isEmpty()){
                Notification.show("Bitte wählen Sie ein Auto aus!", Notification.Type.WARNING_MESSAGE);
                //return;

@@ -18,7 +18,7 @@ public class HinzufuegenWindow extends Window {
 
 
     public HinzufuegenWindow(Auto auto) throws SQLException {
-        super("Hinzufügen von neuen Autos");
+        super("Autos der CarLook ltd.");
         center();
         //setSizeFull();
 
@@ -57,7 +57,6 @@ public class HinzufuegenWindow extends Window {
         // new feature goind into vaadin: column reordering
         grid.setColumnReorderingAllowed(true);
 
-        //grid.getDataCommunicator().fetchItemsWithRange(0, grid.getDataCommunicator().getDataProviderSize());
 
         content.addComponent(grid);
         content.setMargin(true);
@@ -65,21 +64,7 @@ public class HinzufuegenWindow extends Window {
         setClosable(true);
 
 
-        /*
-        Button add = new Button("Add");
-        add.addClickListener(new Button.ClickListener() {
-            @Override
-            public void buttonClick(Button.ClickEvent event) {
 
-                //Notification.show("Ein neues Auto Objekt wurde Hinzugefügt!");
-                UI.getCurrent().getNavigator().navigateTo(Views.HINZUFÜGEN);
-                close();
-            }
-        });
-        */
-
-       // content.addComponent(add);
-       // content.setComponentAlignment(add, Alignment.MIDDLE_CENTER);
         content.setSizeFull();
 
 

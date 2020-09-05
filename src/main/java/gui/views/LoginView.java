@@ -37,7 +37,7 @@ public class LoginView extends VerticalLayout implements View {
 
         final TextField userLogin = new TextField();
         userLogin.setCaption("E-Mail Adresse: ");
-        userLogin.setPlaceholder("Email");
+        userLogin.setPlaceholder("E-Mail");
 
 
         final PasswordField passwordField = new PasswordField();

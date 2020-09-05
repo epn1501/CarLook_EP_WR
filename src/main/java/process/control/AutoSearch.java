@@ -10,12 +10,10 @@ public class AutoSearch {
     Auto auto2 = new Auto("BMW", 2, 150, 2005, "unfallfrei");
     Auto auto3 = new Auto("BMW", 3, 265, 2015, "mit vielen Extras");
     Auto auto4 = new Auto("BMW", 4, 135, 2012, "nur 1 Fahrzeughalter");
-
     Auto auto5 = new Auto("Audi", 5, 252, 2020, "Gepflegtes Auto");
     Auto auto6 = new Auto("Audi", 6, 201, 2013, "unfallfrei");
     Auto auto7 = new Auto("Audi", 7, 190, 2016, "mit vielen Extras");
     Auto auto8 = new Auto("Audi", 8, 116, 2019, "nur 1 Fahrzeughalter");
-
     Auto auto9 = new Auto("Mercedes Benz", 9, 315, 2007, "Gepflegtes Auto");
     Auto auto10 = new Auto("Mercedes Benz", 10, 272, 2011, "unfallfrei");
     Auto auto11 = new Auto("Mercedes Benz", 11, 210, 2018, "mit vielen Extras");
@@ -37,7 +35,6 @@ public class AutoSearch {
     public List<Auto> getAutoByMarke (String marke){
 
         return AutoDAO.getInstance().getAutoByBrand(marke);
-
 
         /*
         ArrayList<Auto> liste = new ArrayList<Auto>();

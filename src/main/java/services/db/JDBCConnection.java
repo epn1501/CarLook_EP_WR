@@ -15,7 +15,6 @@ public class JDBCConnection {
 
     private static JDBCConnection connection = null;
     private String url = "jdbc:postgresql://dumbo.inf.h-brs.de:5432/wrast2s";
-    //private String url = "jdbc:postgresql://dumbo.inf.h-brs.de/wrast2s";
     private String login = "wrast2s";
     private String password = Password.getPassword();
     private Connection conn;

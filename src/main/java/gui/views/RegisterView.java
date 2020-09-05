@@ -28,7 +28,7 @@ public class RegisterView extends VerticalLayout implements View {
 
 
         final TextField userNachname = new TextField();
-        userNachname.setCaption("Nachname: ");
+        userNachname.setCaption("*Nachname: ");
         userNachname.setWidth("475px");
         userNachname.setPlaceholder("Nachname");
 
@@ -87,6 +87,8 @@ public class RegisterView extends VerticalLayout implements View {
                     if(s.length() >= 11 && (s.substring(s.length() - 11, s.length()).equals("@carlook.de"))){
                         addUser.setRole(Roles.VERTRIEBLER_USER);
                         System.out.println(addUser.getRole());
+
+
                     }
                     else{
                         addUser.setRole(Roles.ENDKUNDE_USER);
@@ -134,7 +136,6 @@ public class RegisterView extends VerticalLayout implements View {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event){
-
         this.setUp();
     }
 
