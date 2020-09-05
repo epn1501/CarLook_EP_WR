@@ -72,7 +72,7 @@ public class RegisterView extends VerticalLayout implements View {
                     Notification.show("Das eingegebene Passwort entspricht leider nicht den Anforderungen!", Notification.Type.ERROR_MESSAGE);
                 }
 
-                //ToDo-Bedingung für MAIN, FELDER müssen korrekt ausgefüllt sein
+
                 else {
 
                    String s = login;
@@ -82,8 +82,6 @@ public class RegisterView extends VerticalLayout implements View {
                     addUser.setPasswort(password);
                     addUser.setVorname(vorname);
                     addUser.setNachname(nachname);
-
-
 
 
                     if(s.length() >= 11 && (s.substring(s.length() - 11, s.length()).equals("@carlook.de"))){
@@ -109,30 +107,16 @@ public class RegisterView extends VerticalLayout implements View {
             }
         });
 
-        //layout.addComponent(buttonRegister);
-        //layout.setComponentAlignment(buttonRegister, Alignment.BOTTOM_RIGHT);
 
-        // buttonRegister.setPrimaryStyleName(CLASSNAME + "-register");
-        // layout.addComponent(buttonRegister);
         Button buttonZurueck = new Button("Zurück", FontAwesome.ARROW_LEFT);
         buttonZurueck.addClickListener(event -> UI.getCurrent().getNavigator().navigateTo(Views.LOGIN));
-        //layout.addComponents(buttonZurueck, buttonRegister);
-        // layout.setComponentAlignment(buttonZurueck, Alignment.BOTTOM_LEFT);
-        // layout.setComponentAlignment(buttonRegister, Alignment.BOTTOM_RIGHT);
-        //layout.addComponents(buttonZurueck, buttonRegister);
-        //layout.setComponentAlignment(buttonZurueck, Alignment.BOTTOM_LEFT);
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.addComponents(buttonZurueck, buttonRegister);
 
         layout.addComponent(label);
-
         layout.addComponent(horizontalLayout);
         layout.setComponentAlignment(horizontalLayout, Alignment.MIDDLE_CENTER);
-
-
-
-
 
         Panel panel = new Panel("Jetzt registrieren - gratis in nur 2 Minuten!");
         panel.addStyleName("register");
@@ -141,11 +125,8 @@ public class RegisterView extends VerticalLayout implements View {
         this.setComponentAlignment(panel, Alignment.MIDDLE_CENTER);
 
         panel.setContent(layout);
-        //panel.setSizeUndefined();
-
         panel.setWidth("500px");
         panel.setHeight("500px");
-
 
 
     }
@@ -153,7 +134,6 @@ public class RegisterView extends VerticalLayout implements View {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event){
-
 
         this.setUp();
     }

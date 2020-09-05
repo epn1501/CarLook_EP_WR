@@ -6,7 +6,6 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.MenuBar;
 import gui.windows.HinzufuegenWindow;
-import gui.windows.NewsWindow;
 import gui.windows.ReservierungsWindow;
 import model.objects.dto.Auto;
 import model.objects.dto.NeueListe;
@@ -90,7 +89,6 @@ public class TopPanel extends HorizontalLayout {
             item1.addItem("Liste", FontAwesome.LIST, new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
-                    // Todo: ein Window wird geöffnet um aktuelle Nachrichten/ Mitteilungen zu zeigen
 
                     HinzufuegenWindow window = null;
 
@@ -114,7 +112,7 @@ public class TopPanel extends HorizontalLayout {
             item1.addItem("Hinzufügen", FontAwesome.PLUS_SQUARE_O, new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
-                    // Todo: ein Window wird geöffnet... Hinzufügen von neuen Autos
+
                     UI.getCurrent().getNavigator().navigateTo(Views.HINZUFÜGEN);
                     /*
                     HinzufuegenWindow window = null;

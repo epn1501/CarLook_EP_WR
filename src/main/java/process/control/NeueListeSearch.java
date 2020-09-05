@@ -20,12 +20,6 @@ public class NeueListeSearch {
         return search;
     }
 
-    /*
-    public List<NeueListeAuto> getAutoById (String marke){
-        return NeueListeDAO.getInstance().getAutoById(marke);
-    }
-
-     */
 
     public  List<NeueListe> getNeueListeAll(){
         return NeueListeDAO.getInstance().getNeueListeByAll();

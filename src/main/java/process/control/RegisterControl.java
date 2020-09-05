@@ -21,15 +21,9 @@ public class RegisterControl {
     public boolean chechUserExists(String login) throws DatabaseException{
         return UserDAO.getInstance().checkUserExists(login);
     }
-    
      */
 
-    /*
-    public static boolean registerUser(String login, String passwort, String vorname, String nachname) throws DatabaseException, SQLException {
 
-         boolean result = UserDAO.getInstance().createUser(login, passwort, vorname, nachname);
-         return result;
-    }*/
 
     public static boolean registerUser(User user) throws DatabaseException, SQLException{
         boolean result = UserDAO.getInstance().createUser(user);
