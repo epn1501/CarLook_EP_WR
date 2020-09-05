@@ -62,9 +62,14 @@ public class RegisterView extends VerticalLayout implements View {
                 String nachname = userNachname.getValue();
 
 
-                if(userRegister.isEmpty() && passwordField.isEmpty()){
+                if(userRegister.isEmpty() && passwordField.isEmpty() && userNachname.isEmpty()){
                     Notification.show("Ihre Registrierung war nicht erfolgreich! Bitte erneut versuchen!", Notification.Type.ERROR_MESSAGE);
                 }
+
+                else if(userNachname.isEmpty()){
+                    Notification.show("Bitte geben Sie einen Nachnamen ein.", Notification.Type.ERROR_MESSAGE);
+                }
+
                 else if (userRegister.isEmpty()){
                     Notification.show("Die eingegebene E-Mail-Adresse ist ungültig!", Notification.Type.ERROR_MESSAGE);
                 }
