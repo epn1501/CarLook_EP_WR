@@ -1,8 +1,8 @@
 package gui.views;
 
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import gui.windows.ConfirmationWindow;
@@ -43,7 +43,7 @@ public class HinzufuegenView extends VerticalLayout implements View {
 
         Label label = new Label( "&nbsp;", ContentMode.HTML); //Platzhalter
 
-        Button hinzufuegen = new Button("Hinzufügen", FontAwesome.PLUS_SQUARE_O);
+        Button hinzufuegen = new Button("Hinzufügen", VaadinIcons.PLUS_SQUARE_LEFT_O);
         hinzufuegen.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
@@ -71,7 +71,7 @@ public class HinzufuegenView extends VerticalLayout implements View {
             }
         });
 
-        Button buttonZurueck = new Button("Zurück", FontAwesome.ARROW_LEFT);
+        Button buttonZurueck = new Button("Zurück", VaadinIcons.ARROW_LEFT);
         buttonZurueck.addClickListener(event -> UI.getCurrent().getNavigator().navigateTo(Views.MAIN));
 
 

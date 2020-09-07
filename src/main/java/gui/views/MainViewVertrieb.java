@@ -2,7 +2,6 @@ package gui.views;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import gui.components.TopPanel;
@@ -44,7 +43,7 @@ public class MainViewVertrieb extends VerticalLayout implements View {
             grid.setItems(liste);
             grid.setSizeFull();
 
-            // new feature goind into vaadin: column reordering
+            // new feature going into vaadin: column reordering
             grid.setColumnReorderingAllowed(true);
 
             grid.getDataCommunicator().fetchItemsWithRange(0, grid.getDataCommunicator().getDataProviderSize());

@@ -1,8 +1,9 @@
 package gui.views;
 
+import com.vaadin.event.ShortcutAction;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import gui.windows.ConfirmationWindow;
@@ -35,22 +36,26 @@ public class RegisterView extends VerticalLayout implements View {
         final TextField userRegister = new TextField();
         userRegister.setCaption("*E-Mail: ");
         userRegister.setWidth("475px");
-        userRegister.setPlaceholder("Email");
+        userRegister.setPlaceholder("E-Mail");
 
         final PasswordField passwordField = new PasswordField();
         passwordField.setCaption("*Passwort: ");
         passwordField.setWidth("475px");
         passwordField.setPlaceholder("Passwort");
 
+        Label pflicht = new Label("*Pflichtfelder");
+
         VerticalLayout layout = new VerticalLayout();
         layout.addComponent(userVorname);
         layout.addComponent(userNachname);
         layout.addComponent(userRegister);
         layout.addComponent(passwordField);
+        layout.addComponent(pflicht);
 
         Label label = new Label( "&nbsp;", ContentMode.HTML); //Platzhalter
 
-        Button buttonRegister = new Button("Registrieren", FontAwesome.ARROW_RIGHT);
+        Button buttonRegister = new Button("Registrieren", VaadinIcons.ARROW_RIGHT);
+        buttonRegister.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 
         buttonRegister.addClickListener(new Button.ClickListener() {
             @Override
@@ -115,7 +120,7 @@ public class RegisterView extends VerticalLayout implements View {
         });
 
 
-        Button buttonZurueck = new Button("Zurück", FontAwesome.ARROW_LEFT);
+        Button buttonZurueck = new Button("Zurück", VaadinIcons.ARROW_LEFT);
         buttonZurueck.addClickListener(event -> UI.getCurrent().getNavigator().navigateTo(Views.LOGIN));
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();

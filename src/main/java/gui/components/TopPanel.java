@@ -1,6 +1,6 @@
 package gui.components;
 
-import com.vaadin.server.FontAwesome;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Label;
@@ -25,7 +25,7 @@ public class TopPanel extends HorizontalLayout {
 
         this.setSizeFull();
 
-        Label headLabel = new Label("Carlook ltd. - <i>das Auto-Reservierungssystem</i>", ContentMode.HTML);
+        Label headLabel = new Label("CarLook ltd. - <i>das Auto-Reservierungssystem</i>", ContentMode.HTML);
         headLabel.setSizeUndefined();
         headLabel.addStyleName("mytitel");
 
@@ -40,8 +40,6 @@ public class TopPanel extends HorizontalLayout {
             vorname = user.getVorname();
         }
 
-
-
         Label loggedLabel = new Label ("Welcome: " + vorname + "!");
         loggedLabel.setSizeUndefined();
         loggedLabel.addStyleName("loggedLabel");
@@ -51,20 +49,10 @@ public class TopPanel extends HorizontalLayout {
 
         MenuBar bar = new MenuBar();
         MenuBar.MenuItem item1 = bar.addItem("Menu", null);
-        //Logout des Users
-        if(user.hasRole (Roles.ADMIN ) || user.hasRole(Roles.CURRENT_USER) || user.hasRole(Roles.ENDKUNDE_USER) || user.hasRole(Roles.VERTRIEBLER_USER)) {
-            item1.addItem("Logout", FontAwesome.SIGN_OUT, new MenuBar.Command() {
-                @Override
-                public void menuSelected(MenuBar.MenuItem selectedItem) {
 
-                    LoginControl.logoutUser();
-                }
-            });
-        }
-
-        //Liste der Reservierungen -> Cancle
+        //Liste der Reservierungen -> Cancel
         if(user.hasRole (Roles.ADMIN )  || user.hasRole(Roles.ENDKUNDE_USER) ) {
-            item1.addItem("Reservierungen", FontAwesome.CHECK_CIRCLE_O, new MenuBar.Command() {
+            item1.addItem("Reservierungen", VaadinIcons.CHECK_CIRCLE_O, new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
 
@@ -86,7 +74,7 @@ public class TopPanel extends HorizontalLayout {
         // News window
         if(user.hasRole (Roles.ADMIN)  || user.hasRole(Roles.VERTRIEBLER_USER) ) {
 
-            item1.addItem("Liste", FontAwesome.LIST, new MenuBar.Command() {
+            item1.addItem("Liste", VaadinIcons.LIST, new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
 
@@ -105,11 +93,10 @@ public class TopPanel extends HorizontalLayout {
             });
         }
 
-
         // Hinzufügen von neuen Autos
         if(user.hasRole (Roles.ADMIN) || user.hasRole(Roles.VERTRIEBLER_USER)) {
 
-            item1.addItem("Hinzufügen", FontAwesome.PLUS_SQUARE_O, new MenuBar.Command() {
+            item1.addItem("Hinzufügen", VaadinIcons.PLUS_SQUARE_LEFT_O, new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
 
@@ -126,6 +113,17 @@ public class TopPanel extends HorizontalLayout {
                     }
                     UI.getCurrent().addWindow(window);
                     */
+                }
+            });
+        }
+
+        //Logout des Users
+        if(user.hasRole (Roles.ADMIN ) || user.hasRole(Roles.CURRENT_USER) || user.hasRole(Roles.ENDKUNDE_USER) || user.hasRole(Roles.VERTRIEBLER_USER)) {
+            item1.addItem("Logout", VaadinIcons.SIGN_OUT, new MenuBar.Command() {
+                @Override
+                public void menuSelected(MenuBar.MenuItem selectedItem) {
+
+                    LoginControl.logoutUser();
                 }
             });
         }

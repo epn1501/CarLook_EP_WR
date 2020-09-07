@@ -1,9 +1,9 @@
 package gui.views;
 
 import com.vaadin.event.ShortcutAction;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
@@ -55,7 +55,7 @@ public class LoginView extends VerticalLayout implements View {
         layout.addComponent(label);
 
 
-        Button buttonLogin = new Button("Login", FontAwesome.SEARCH);
+        Button buttonLogin = new Button("Login", VaadinIcons.CHECK);
         buttonLogin.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         // buttonLogin.setPrimaryStyleName(CLASSNAME + "-login");
         layout.addComponent(buttonLogin);
