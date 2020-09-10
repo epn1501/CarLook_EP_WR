@@ -49,7 +49,7 @@ public class AutoDAO extends AbstractDAO{
         try{
             rs = statement.executeQuery("SELECT *"
                     + "FROM carlookwr.autos "
-                    + "WHERE carlookwr.autos.marke = \'" + marke + "\'");
+                    + "WHERE LOWER(carlookwr.autos.marke) = LOWER(\'" + marke + "\')");
         }catch (SQLException ex){
 
         }

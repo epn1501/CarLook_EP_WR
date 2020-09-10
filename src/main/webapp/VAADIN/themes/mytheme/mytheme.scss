@@ -30,11 +30,40 @@
 // Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
 
 
+$v-app-loading-text: "Flat Valo";
 
+$v-font-family: "Roboto", sans-serif;
+$v-font-weight: 400;
+$v-font-weight--header: 400;
+$v-background-color: #fafafa;
+$v-focus-color: rgb(150,190,90);
+$v-luminance-threshold: 180;
+$v-border: 2px solid v-shade;
+$v-border-radius: 6px;
+$v-bevel: false;
+$v-gradient: false;
+$v-shadow: false;
+$v-textfield-bevel: false;
+$v-textfield-shadow: false;
+$v-link-text-decoration: false;
+$v-selection-overlay-padding-horizontal: 0;
+$v-selection-overlay-padding-vertical: 6px;
+$v-selection-item-height: 30px;
+$v-selection-item-border-radius: 0;
+$valo-menu-background-color: #eee;
 
-
-
-
+.mytitel {
+  font-family: Verdana;
+  font-variant: small-caps;
+  font-weight: bold;
+  color: coral;
+  padding: 10px;
+  font-size: 24px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
+  text-shadow: 2px 2px 5px black;
+}
 
 
 @import '../valo/valo.scss';

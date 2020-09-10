@@ -25,7 +25,7 @@ public class TopPanel extends HorizontalLayout {
 
         this.setSizeFull();
 
-        Label headLabel = new Label("CarLook ltd. - <i>das Auto-Reservierungssystem</i>", ContentMode.HTML);
+        Label headLabel = new Label("CarLook Ltd. <br><i>Das Auto-Reservierungssystem</i></br>", ContentMode.HTML);
         headLabel.setSizeUndefined();
         headLabel.addStyleName("mytitel");
 

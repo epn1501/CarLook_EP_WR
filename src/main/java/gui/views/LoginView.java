@@ -26,14 +26,22 @@ public class LoginView extends VerticalLayout implements View {
 
         this.setSizeFull();
 
+        Label headLabel = new Label("CarLook Ltd. <br><i>Das Auto-Reservierungssystem</i></br>", ContentMode.HTML);
+        headLabel.setSizeUndefined();
+        headLabel.addStyleName("mytitel");
+
+        this.addComponent(headLabel);
+        this.setComponentAlignment(headLabel, Alignment.TOP_LEFT);
+
+        setMargin(true);
+
         /*
-       Label titel = new Label("Carlook ltd.");
-        // titel.addStyleNames(ValoTheme.LABEL_H1);
+       Label titel = new Label("Carlook Ltd.");
+       // titel.addStyleNames(ValoTheme.LABEL_H1);
        titel.setWidth(null);
        titel.setPrimaryStyleName(CLASSNAME + "-titel");
        addComponent(titel);
          */
-
 
         final TextField userLogin = new TextField();
         userLogin.setCaption("E-Mail Adresse: ");
@@ -48,12 +56,9 @@ public class LoginView extends VerticalLayout implements View {
         layout.addComponent(userLogin);
         layout.addComponent(passwordField);
 
-
-
         Label label = new Label( "&nbsp;", ContentMode.HTML); //Platzhalter
 
         layout.addComponent(label);
-
 
         Button buttonLogin = new Button("Login", VaadinIcons.CHECK);
         buttonLogin.setClickShortcut(ShortcutAction.KeyCode.ENTER);
@@ -65,7 +70,7 @@ public class LoginView extends VerticalLayout implements View {
         panel.addStyleName("login");
 
         this.addComponent(panel);
-        this.setComponentAlignment(panel, Alignment.MIDDLE_CENTER);
+        this.setComponentAlignment(panel, Alignment.TOP_CENTER);
 
         Button buttonRegister = new Button("Noch nicht registriert?");
         buttonRegister.addStyleName(ValoTheme.BUTTON_LINK);
@@ -75,8 +80,6 @@ public class LoginView extends VerticalLayout implements View {
 
         panel.setContent(layout);
         panel.setSizeUndefined();
-
-
 
         buttonLogin.addClickListener(new Button.ClickListener() {
             @Override
@@ -100,9 +103,6 @@ public class LoginView extends VerticalLayout implements View {
 
             }
         });
-
-
-
     }
 
     @Override
@@ -124,5 +124,4 @@ public class LoginView extends VerticalLayout implements View {
         }
 
     }
-
 }
