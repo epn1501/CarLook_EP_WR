@@ -6,6 +6,7 @@ import process.control.LoginControl;
 import process.control.exceptions.DatabaseException;
 import services.db.JDBCConnection;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -55,9 +56,7 @@ public class RoleDAO extends AbstractDAO{
             Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if( rs == null) {
-            return null;
-        }
+        if( rs == null) return null;
 
         List<Role> liste = new ArrayList<Role>();
         Role role = null;
@@ -74,6 +73,36 @@ public class RoleDAO extends AbstractDAO{
         }
         return liste;
     }
+
+
+    public boolean createRolle (User user, Role rolle){
+
+        String sql = "INSERT INTO carlookwr.user_to_rolle (login, rolle) VALUES (?,?)";
+        PreparedStatement statement = this.getPreparedStatement(sql);
+        ResultSet rs = null;
+
+
+        try{
+
+            statement.setString(1, user.getLogin());
+            statement.setString(2, rolle.getBezeichnung());
+            int rowsChanged = statement.executeUpdate();
+            if(rowsChanged == 0){
+                throw new SQLException("Creating Role to User failed");
+            }
+            rs = statement.getGeneratedKeys();
+            return true;
+
+        }catch (SQLException ex){
+            System.err.println("Got an exception! ");
+            System.err.println(ex.getMessage());
+            return false;
+        }finally {
+            closeResultset(rs);
+        }
+    }
+
+
 
 
 }

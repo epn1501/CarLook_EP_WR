@@ -7,7 +7,9 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import gui.windows.ConfirmationWindow;
+import model.dao.RoleDAO;
 import model.dao.UserDAO;
+import model.objects.dto.Role;
 import model.objects.dto.User;
 import process.control.exceptions.DatabaseException;
 import services.util.Roles;
@@ -93,16 +95,27 @@ public class RegisterView extends VerticalLayout implements View {
                     addUser.setVorname(vorname);
                     addUser.setNachname(nachname);
 
+                    Role rolle = new Role();
 
                     if(s.length() >= 11 && (s.substring(s.length() - 11, s.length()).equals("@carlook.de"))){
                         addUser.setRole(Roles.VERTRIEBLER_USER);
                         System.out.println(addUser.getRole());
+
+                        rolle.setBezeichnung("vertriebler");
+                        RoleDAO.getInstance().createRolle(addUser,rolle);
+
 
 
                     }
                     else{
                         addUser.setRole(Roles.ENDKUNDE_USER);
                         System.out.println(addUser.getRole());
+
+                        rolle.setBezeichnung("endkunde");
+                        RoleDAO.getInstance().createRolle(addUser, rolle);
+
+
+
                     }
 
 

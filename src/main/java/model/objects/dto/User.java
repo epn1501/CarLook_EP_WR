@@ -56,6 +56,8 @@ public class User {
         return role;
     }
 
+
+
     public boolean hasRole(String role) {
         //Lazy Load
         if (this.roles == null) {
