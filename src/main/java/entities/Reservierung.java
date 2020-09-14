@@ -11,20 +11,27 @@ public class Reservierung {
 
 
     public int getReservierungsID() {
+
         return reservierungsID;
     }
 
     public void setReservierungsID(int reservierungsID) {
+
         this.reservierungsID = reservierungsID;
     }
 
     public User getUser() {
+
         return user;
     }
 
     public void setUser(User user) {
+
         this.user = user;
     }
+
+
+
 
     public Auto getAuto() {
         return auto;

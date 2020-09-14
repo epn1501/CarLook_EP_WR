@@ -4,11 +4,14 @@ package gui.windows;
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.ui.*;
 import model.dao.NeueListeDAO;
+import model.dao.ReservierungDAO;
 import model.objects.dto.NeueListe;
+import model.objects.dto.User;
 import org.atmosphere.interceptor.AtmosphereResourceStateRecovery;
 import process.control.NeueListeSearch;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Window;
+import services.util.Roles;
 import services.util.Views;
 
 import java.sql.SQLException;
@@ -17,6 +20,8 @@ import java.util.Set;
 
 
 public class ReservierungsWindow extends Window {
+
+    User user = (User) UI.getCurrent().getSession().getAttribute(Roles.CURRENT_USER);
 
 
     public ReservierungsWindow(NeueListe neueListe) throws SQLException {
@@ -61,9 +66,19 @@ public class ReservierungsWindow extends Window {
             public void buttonClick(Button.ClickEvent event) {
 
                 if(selection.isEmpty()) {
-                    Notification.show("Die Reservierung wurde versendet! Ihre Reservierungsnr.: " + random);
-                    System.out.println("Die Reservierung wurde versendet! Ihre Reservierungsnr.: " + random);
+                    //Notification.show("Die Reservierung wurde versendet! Ihre Reservierungsnr.: " + random);
+                    //System.out.println("Die Reservierung wurde versendet! Ihre Reservierungsnr.: " + random);
+                    Notification.show("Die Reservierung wurde versendet!");
+                    System.out.println("Die Reservierung wurde versendet!" );
+
+                    //Ausgabe der ReservierungsID
+                    //ReservierungDAO.getInstance().getReservierungsId(user);
+
                     close();
+                    // Die ReservierungsNr -> reservierungs DB + user Login
+                    ReservierungDAO.getInstance().createReservierung(user);
+                    //Db Löschen
+                    NeueListeDAO.getInstance().deleteTableNeueListe();
                 }
                 else{
                     //Notification.show("Das Auto mit der ID: " + selection.getValue().getId() + " wurde mit der Reservierungsnr: " + random +" reserviert!");

@@ -26,42 +26,6 @@ public class NeueListeDAO extends AbstractDAO {
         return dao;
     }
 
-    /*
-    public List<NeueListeAuto> getAutoById (String marke){
-        Statement statement = this.getStatement();
-        ResultSet rs = null;
-
-        try{
-            rs = statement.executeQuery("SELECT *"
-                    + "FROM carlookew.neueListe ");
-        }catch (SQLException ex){
-
-        }
-
-        if( rs == null ){
-            return null;
-        }
-
-        List<NeueListeAuto> liste = new ArrayList<NeueListeAuto>();
-        NeueListeAuto neueListeAuto = null;
-
-        try{
-            while (rs.next()){
-                neueListeAuto = new NeueListeAuto();
-                neueListeAuto.setId(rs.getInt(1));
-                neueListeAuto.setMarke(rs.getString(2));
-                neueListeAuto.setPs(rs.getInt(3));
-                neueListeAuto.setBaujahr(rs.getInt(4));
-                neueListeAuto.setDescription(rs.getString(5));
-                liste.add(neueListeAuto);
-            }
-        }catch (SQLException ex){
-
-        }
-        return liste;
-
-    }
-    */
 
     public List<NeueListe> getNeueListeByAll(){
 
@@ -136,6 +100,23 @@ public class NeueListeDAO extends AbstractDAO {
         try {
 
             statement.execute("DELETE FROM carlookwr.neueliste WHERE carlookwr.neueliste.auto_id = \'" + id + "\';");
+
+
+        } catch (SQLException ex) {
+            System.err.println("Got an exception! ");
+            System.err.println(ex.getMessage());
+
+        }
+
+    }
+
+    public void deleteTableNeueListe(){
+
+        Statement statement = this.getStatement();
+
+        try {
+
+            statement.execute("DELETE FROM carlookwr.neueliste ");
 
 
         } catch (SQLException ex) {
