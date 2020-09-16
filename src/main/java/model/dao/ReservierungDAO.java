@@ -1,32 +1,23 @@
 package model.dao;
 
-import entities.Reservierung;
 import model.objects.dto.User;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ReservierungDAO extends AbstractDAO {
-
     public static ReservierungDAO dao = null;
 
-
-
-
-   private  ReservierungDAO(){
-
-   }
+    private  ReservierungDAO(){
+    }
 
     public static ReservierungDAO getInstance(){
         if(dao == null){
             dao = new ReservierungDAO();
         }
-
         return dao;
     }
-
 
     public boolean createReservierung (User user){
 
@@ -42,17 +33,14 @@ public class ReservierungDAO extends AbstractDAO {
             }
             rs = statement.getGeneratedKeys();
             return true;
-
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.err.println("Got an exception! ");
             System.err.println(ex.getMessage());
             return false;
-        }finally {
+        } finally {
             closeResultset(rs);
         }
-
     }
-
 
     public void getReservierungsId(User user) {
 
@@ -76,11 +64,6 @@ public class ReservierungDAO extends AbstractDAO {
         } catch (SQLException ex) {
             System.err.println("Got an exception! ");
             System.err.println(ex.getMessage());
-
         }
-
     }
-
-
-
 }

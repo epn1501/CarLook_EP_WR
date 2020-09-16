@@ -3,9 +3,6 @@ package model.dao;
 import model.objects.dto.Role;
 import model.objects.dto.User;
 import process.control.LoginControl;
-import process.control.exceptions.DatabaseException;
-import services.db.JDBCConnection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,11 +15,9 @@ import java.util.logging.Logger;
 public class RoleDAO extends AbstractDAO{
 
     //SINGLETON
-
     public static RoleDAO dao = null;
 
     private RoleDAO(){
-
     }
 
     public static RoleDAO getInstance() {
@@ -35,15 +30,6 @@ public class RoleDAO extends AbstractDAO{
     public List<Role> getRolesForUser (User user){
 
         Statement statement = this.getStatement();
-
-        /*
-        Statement statement = null;
-        try{
-            statement = JDBCConnection.getInstance().getStatement();
-        } catch (DatabaseException ex){
-            Logger.getLogger(AutoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
 
         ResultSet rs = null;
 
@@ -68,12 +54,11 @@ public class RoleDAO extends AbstractDAO{
                 role.setBezeichnung(rs.getString(2));
                 liste.add(role);
             }
-        }catch(SQLException ex){
+        } catch(SQLException ex) {
             Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return liste;
     }
-
 
     public boolean createRolle (User user, Role rolle){
 
@@ -81,8 +66,7 @@ public class RoleDAO extends AbstractDAO{
         PreparedStatement statement = this.getPreparedStatement(sql);
         ResultSet rs = null;
 
-
-        try{
+        try {
 
             statement.setString(1, user.getLogin());
             statement.setString(2, rolle.getBezeichnung());
@@ -93,17 +77,12 @@ public class RoleDAO extends AbstractDAO{
             rs = statement.getGeneratedKeys();
             return true;
 
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.err.println("Got an exception! ");
             System.err.println(ex.getMessage());
             return false;
-        }finally {
+        } finally {
             closeResultset(rs);
         }
     }
-
-
-
-
 }
-

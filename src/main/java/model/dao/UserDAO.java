@@ -5,7 +5,6 @@ import process.control.LoginControl;
 import process.control.exceptions.DatabaseException;
 import services.db.JDBCConnection;
 import services.util.Roles;
-
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,15 +13,12 @@ public class UserDAO extends AbstractDAO {
 
     private static final String EXCEPTION = "Fehler im SQL-Befehl! Bitte den Programmierer benachrichtigen!";
     private static UserDAO dao = null;
-
     private String login = null;
     private String password = null;
     private String vorname = null;
     private String nachname = null;
     private String role = Roles.CURRENT_USER;
-
     private int number;
-
 
     public String getLogin() {
         return login;
@@ -110,15 +106,13 @@ public class UserDAO extends AbstractDAO {
         } catch (SQLException | DatabaseException e) {
             Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, e.getMessage());
 
-            throw new DatabaseException("Fehler im SQL Befehl! Bitte den Programmierer benachrichtigen.");
+            throw new DatabaseException(EXCEPTION);
         } finally {
             model.dao.AbstractDAO.closeResultset(rs);
             JDBCConnection.getInstance().closeConnection();
         }
-
         return null;
     }
-
 
     public boolean createUser(User user)  {
 
@@ -127,7 +121,6 @@ public class UserDAO extends AbstractDAO {
         ResultSet rs = null;
 
         try{
-
             stm.setString(1, user.getLogin());
             stm.setString(2, user.getPasswort());
             stm.setString(3, user.getVorname());
@@ -137,22 +130,14 @@ public class UserDAO extends AbstractDAO {
                 throw  new SQLException("Creating user failed");
             }
             rs = stm.getGeneratedKeys();
-
-
             return true;
 
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.err.println("Got an exception! ");
             System.err.println(ex.getMessage());
             return false;
-        }finally {
+        } finally {
             closeResultset(rs);
         }
-
     }
-
-
-
-
-
 }

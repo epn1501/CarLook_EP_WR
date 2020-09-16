@@ -8,16 +8,12 @@ import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import gui.ui.MyUI;
-import gui.windows.HinzufuegenWindow;
 import model.objects.dto.User;
 import process.control.LoginControl;
 import process.control.exceptions.DatabaseException;
 import process.control.exceptions.NoSuchUserOrPassword;
 import services.util.Roles;
 import services.util.Views;
-
-import java.sql.SQLException;
 
 public class LoginView extends VerticalLayout implements View {
     public static final String CLASSNAME = "LOGINSEITE";
@@ -35,18 +31,9 @@ public class LoginView extends VerticalLayout implements View {
 
         setMargin(true);
 
-        /*
-       Label titel = new Label("Carlook Ltd.");
-       // titel.addStyleNames(ValoTheme.LABEL_H1);
-       titel.setWidth(null);
-       titel.setPrimaryStyleName(CLASSNAME + "-titel");
-       addComponent(titel);
-         */
-
         final TextField userLogin = new TextField();
         userLogin.setCaption("E-Mail Adresse: ");
         userLogin.setPlaceholder("E-Mail");
-
 
         final PasswordField passwordField = new PasswordField();
         passwordField.setCaption("Passwort: ");
@@ -86,7 +73,6 @@ public class LoginView extends VerticalLayout implements View {
             public void buttonClick(Button.ClickEvent clickEvent) {
                 String login = userLogin.getValue();
                 String password = passwordField.getValue();
-
                 try {
                     LoginControl.checkAuthentication(login, password);
                 } catch (NoSuchUserOrPassword ex) {
@@ -100,7 +86,6 @@ public class LoginView extends VerticalLayout implements View {
                     userLogin.setValue("");
                     passwordField.setValue("");
                 }
-
             }
         });
     }
@@ -111,17 +96,10 @@ public class LoginView extends VerticalLayout implements View {
         User user = (User) VaadinSession.getCurrent().getAttribute(Roles.CURRENT_USER);
 
         if(user != null){
-
             UI.getCurrent().getNavigator().navigateTo(Views.MAIN);
         }
-
-       // else if(user != null && user.hasRole(Roles.VERTRIEBLER_USER)){
-        //    UI.getCurrent().getNavigator().navigateTo(Views.MAINvertrieb);
-        //}
-
         else{
             this.setUp();
         }
-
     }
 }

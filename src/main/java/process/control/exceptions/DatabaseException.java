@@ -14,7 +14,6 @@ public class DatabaseException extends Exception {
      * @return String description of reason
      */
     public String getReason() {
-
         return reason;
     }
 

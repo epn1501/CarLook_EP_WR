@@ -1,7 +1,6 @@
 package model.dao;
 
 import model.objects.dto.NeueListe;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,29 +14,24 @@ public class NeueListeDAO extends AbstractDAO {
     public static NeueListeDAO dao = null;
 
     private NeueListeDAO(){
-
     }
 
     public static NeueListeDAO getInstance(){
         if(dao == null){
             dao = new NeueListeDAO();
         }
-
         return dao;
     }
-
 
     public List<NeueListe> getNeueListeByAll(){
 
         Statement statement = this.getStatement();
 
         ResultSet rs = null;
-
         try{
             rs = statement.executeQuery("SELECT *"
                     + "FROM carlookwr.neueliste ");
-        }catch (SQLException ex){
-
+        } catch (SQLException ex){
         }
 
         if( rs == null ){
@@ -57,8 +51,7 @@ public class NeueListeDAO extends AbstractDAO {
                 neueListe.setDescription(rs.getString(5));
                 liste.add(neueListe);
             }
-        }catch (SQLException ex){
-
+        } catch (SQLException ex) {
         }
         return liste;
 
@@ -82,32 +75,25 @@ public class NeueListeDAO extends AbstractDAO {
             }
             rs = statement.getGeneratedKeys();
             return true;
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.err.println("Got an exception! ");
             System.err.println(ex.getMessage());
             return false;
-        }finally {
+        } finally {
             closeResultset(rs);
         }
-
     }
-
 
     public void deleteNeueListe(Integer id) {
 
         Statement statement = this.getStatement();
 
         try {
-
             statement.execute("DELETE FROM carlookwr.neueliste WHERE carlookwr.neueliste.auto_id = \'" + id + "\';");
-
-
         } catch (SQLException ex) {
             System.err.println("Got an exception! ");
             System.err.println(ex.getMessage());
-
         }
-
     }
 
     public void deleteTableNeueListe(){
@@ -115,18 +101,10 @@ public class NeueListeDAO extends AbstractDAO {
         Statement statement = this.getStatement();
 
         try {
-
             statement.execute("DELETE FROM carlookwr.neueliste ");
-
-
         } catch (SQLException ex) {
             System.err.println("Got an exception! ");
             System.err.println(ex.getMessage());
-
         }
-
     }
-
-
-
 }

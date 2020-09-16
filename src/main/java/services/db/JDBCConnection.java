@@ -3,7 +3,6 @@ package services.db;
 import org.postgresql.Driver;
 import process.control.exceptions.DatabaseException;
 import services.util.Password;
-
 import java.sql.*;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -11,18 +10,14 @@ import java.util.logging.Logger;
 
 public class JDBCConnection {
 
-
-
     private static JDBCConnection connection = null;
     private String url = "jdbc:postgresql://dumbo.inf.h-brs.de:5432/wrast2s";
     private String login = "wrast2s";
     private String password = Password.getPassword();
     private Connection conn;
 
-
     private JDBCConnection() throws DatabaseException {
         this.initConnection();
-
     }
 
     public  static JDBCConnection getInstance() throws DatabaseException {
@@ -35,7 +30,6 @@ public class JDBCConnection {
 
     public void initConnection() throws DatabaseException {
         try {
-            //DriverManager.registerDriver(new org.postgresql.Driver());
             DriverManager.registerDriver(new Driver());
 
         } catch (SQLException ex) {
@@ -44,15 +38,12 @@ public class JDBCConnection {
         this.openConnection();
     }
 
-
     public void openConnection() throws DatabaseException {
 
         try {
-
         Properties properties = new Properties();
         properties.setProperty("user", "wrast2s");
         properties.setProperty("password", Password.PASSWORD);
-
 
             this.conn = DriverManager.getConnection(this.url, properties);
 
@@ -68,7 +59,7 @@ public class JDBCConnection {
                 this.openConnection();
             }
             return this.conn.createStatement();
-        }catch (SQLException | DatabaseException ex){
+        } catch (SQLException | DatabaseException ex) {
             Logger.getLogger(JDBCConnection.class.getName()).log(Level.SEVERE, null, ex);
             return null;
             }
@@ -93,8 +84,4 @@ public class JDBCConnection {
                 throw new DatabaseException("Fehler beim Zugriff auf die Datenbank! Sichere Verbindung vorhanden?");
             }
         }
-
-
-
-
 }

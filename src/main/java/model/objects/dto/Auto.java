@@ -9,7 +9,6 @@ public class Auto implements  java.io.Serializable {
     private String description;
 
     public Auto(){
-
     }
 
     public Auto ( Integer id, String marke, Integer ps, Integer baujahr, String description){
@@ -25,7 +24,6 @@ public class Auto implements  java.io.Serializable {
         this.ps = ps;
         this.baujahr = baujahr;
         this.description = description;
-
     }
 
     public Integer getId(){
@@ -51,6 +49,7 @@ public class Auto implements  java.io.Serializable {
     public void setPs(Integer ps){
         this.ps = ps;
     }
+
     public Integer getBaujahr(){
         return baujahr;
     }
@@ -59,7 +58,6 @@ public class Auto implements  java.io.Serializable {
         this.baujahr = baujahr;
     }
 
-
     public String getDescription(){
         return description;
     }
@@ -67,6 +65,4 @@ public class Auto implements  java.io.Serializable {
     public void setDescription(String description){
         this.description = description;
     }
-
-
 }

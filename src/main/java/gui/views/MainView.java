@@ -5,29 +5,22 @@ import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.components.grid.ItemClickListener;
-
-
 import gui.components.TopPanel;
 import model.dao.NeueListeDAO;
-import  model.objects.dto.Auto;
+import model.objects.dto.Auto;
 import model.objects.dto.NeueListe;
 import model.objects.dto.User;
-import  process.control.AutoSearch;
-
-
+import process.control.AutoSearch;
 import java.util.List;
 import java.util.Locale;
-
 import services.util.Roles;
 import services.util.Views;
 
 public class MainView extends VerticalLayout implements View {
 
     private int anzahlSuche = 0;
-    //private Auto autoSelektiert = null;
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event){
@@ -39,14 +32,11 @@ public class MainView extends VerticalLayout implements View {
         }else{
             this.setUp();
         }
-
-        //this.setUp();
     }
 
     public void setUp(){
 
         this.addComponent( new TopPanel());
-        //this.addComponent(new Label ("<hr/>", ContentMode.HTML)); //Linie
 
         setMargin(true);
 
@@ -56,7 +46,6 @@ public class MainView extends VerticalLayout implements View {
         final TextField textField = new TextField();
 
         User user = (User) UI.getCurrent().getSession().getAttribute(Roles.CURRENT_USER);
-                                      //User user = ((MyUI) UI.getCurrent()).getUser();
 
         //Vorsichtsabfrage!
         String vorname = null;
@@ -82,16 +71,12 @@ public class MainView extends VerticalLayout implements View {
 
         SingleSelect<Auto> selection = grid.asSingleSelect();
 
-
         Button reserviereButton = new Button("Zur Reservierung hinzufügen", (Button.ClickListener) clickEvent -> {
            if(selection.isEmpty()){
                Notification.show("Bitte wählen Sie ein Auto aus!", Notification.Type.WARNING_MESSAGE);
-               //return;
             }
            else {
-                //Notification.show("Auto reserviert!");
-                Notification.show("Das Auto mit der ID: " + selection.getValue().getId()+ " wurde reserviert!");
-                //System.out.println("Auto selektiert: " + MainView.this.autoSelektiert.getMarke());
+               Notification.show("Das Auto mit der ID: " + selection.getValue().getId()+ " wurde reserviert!");
 
                NeueListe neueListe = new NeueListe();
                neueListe.setId(selection.getValue().getId());
@@ -106,15 +91,11 @@ public class MainView extends VerticalLayout implements View {
                System.out.println(selection.getValue().getBaujahr());
 
                NeueListeDAO.getInstance().createNeueListe(neueListe);
-
            }
         });
 
         grid.addItemClickListener((ItemClickListener<Auto>)
-                //itemClick -> System.out.println("Zeile selektiert: " + itemClick.getItem().toString()));
                 itemClick -> System.out.println("Zeile selektiert: " + itemClick.getItem().getId()));
-
-
 
         //MainView -> SucheButton
         sucheButton.addClickListener(new Button.ClickListener() {
@@ -137,11 +118,5 @@ public class MainView extends VerticalLayout implements View {
                 }
             }
         });
-
-
     }
-
-
-
-
 }

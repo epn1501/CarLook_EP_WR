@@ -7,5 +7,4 @@ public class Views {
     public static final String REGISTER = "register";
     public static final String MAINvertrieb = "vertrieb";
     public static final String HINZUFÜGEN = "hinzufügen";
-
 }

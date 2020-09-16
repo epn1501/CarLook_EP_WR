@@ -3,7 +3,6 @@ package model.dao;
 import model.objects.dto.Auto;
 import process.control.exceptions.DatabaseException;
 import services.db.JDBCConnection;
-
 import javax.swing.plaf.nimbus.State;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,39 +18,25 @@ public class AutoDAO extends AbstractDAO{
     private static AutoDAO dao = null;
 
     public AutoDAO(){
-
     }
 
     public static AutoDAO getInstance(){
         if(dao == null){
             dao = new AutoDAO();
         }
-
         return dao;
     }
-
 
     public List<Auto> getAutoByBrand (String marke){
 
         Statement statement = this.getStatement();
 
-        /*
-        Statement statement = null;
-        try{
-            statement = JDBCConnection.getInstance().getStatement();
-        } catch (DatabaseException ex){
-            Logger.getLogger(AutoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
-
         ResultSet rs = null;
-
         try{
             rs = statement.executeQuery("SELECT *"
                     + "FROM carlookwr.autos "
                     + "WHERE LOWER(carlookwr.autos.marke) = LOWER(\'" + marke + "\')");
-        }catch (SQLException ex){
-
+        }catch (SQLException ex) {
         }
 
         if( rs == null ){
@@ -71,26 +56,14 @@ public class AutoDAO extends AbstractDAO{
                 auto.setDescription(rs.getString(5));
                 liste.add(auto);
             }
-        }catch (SQLException ex){
-
+        }catch (SQLException ex) {
         }
         return liste;
-
-
     }
 
-    public List<Auto>  getAutoByAll(){
+    public List<Auto> getAutoByAll(){
 
         Statement statement = this.getStatement();
-
-        /*
-        Statement statement = null;
-        try{
-            statement = JDBCConnection.getInstance().getStatement();
-        } catch (DatabaseException ex){
-            Logger.getLogger(AutoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
 
         ResultSet rs = null;
 
@@ -98,7 +71,6 @@ public class AutoDAO extends AbstractDAO{
             rs = statement.executeQuery("SELECT *"
                     + "FROM carlookwr.autos ");
         }catch (SQLException ex){
-
         }
 
         if( rs == null ){
@@ -119,14 +91,9 @@ public class AutoDAO extends AbstractDAO{
                 liste.add(auto);
             }
         }catch (SQLException ex){
-
         }
         return liste;
-
-
     }
-
-
 
     public boolean createAuto(Auto auto){
 
@@ -145,15 +112,12 @@ public class AutoDAO extends AbstractDAO{
             }
             rs = statement.getGeneratedKeys();
             return true;
-        }catch (SQLException ex){
+        }catch (SQLException ex) {
             System.err.println("Got an exception! ");
             System.err.println(ex.getMessage());
             return false;
         }finally {
             closeResultset(rs);
         }
-
     }
-
-
 }

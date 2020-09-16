@@ -26,11 +26,9 @@ public class Vertriebler extends Benutzer {
         return vorname;
     }
 
-
     public int getVertrieblerID() {
         return vertrieblerID;
     }
-
 
     public void setVertrieblerID(int vertrieblerID) {
         this.vertrieblerID = vertrieblerID;

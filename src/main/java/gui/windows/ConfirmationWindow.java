@@ -23,7 +23,4 @@ public class ConfirmationWindow extends Window {
         content.addComponent(reservierungsButton);
         content.setComponentAlignment(reservierungsButton, Alignment.MIDDLE_CENTER);
     }
-
-
 }
-

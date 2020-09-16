@@ -1,7 +1,6 @@
 package model.objects.dto;
 
 import model.dao.RoleDAO;
-
 import java.util.List;
 
 public class User {
@@ -14,17 +13,14 @@ public class User {
     private String role = null;
 
     public String getVorname() {
-
         return vorname;
     }
 
     public void setVorname(String vorname) {
-
         this.vorname = vorname;
     }
 
     public String getLogin() {
-
         return login;
     }
 
@@ -56,8 +52,6 @@ public class User {
         return role;
     }
 
-
-
     public boolean hasRole(String role) {
         //Lazy Load
         if (this.roles == null) {
@@ -72,18 +66,7 @@ public class User {
         return false;
     }
 
-    /*
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-    */
-
-
-
     private void getRoles() {
         this.roles = RoleDAO.getInstance().getRolesForUser(this);
-
     }
-
-
 }

@@ -8,7 +8,6 @@ public class NeueListe implements java.io.Serializable {
     private Integer baujahr;
     private String description;
 
-
     public NeueListe(){
 
     }
@@ -25,58 +24,43 @@ public class NeueListe implements java.io.Serializable {
         this.description = description;
     }
 
-
-
-
     public Integer getId() {
         return id;
     }
-
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-
     public String getMarke() {
         return marke;
     }
-
 
     public void setMarke(String marke) {
         this.marke = marke;
     }
 
-
     public Integer getPs() {
         return ps;
     }
-
 
     public void setPs(Integer ps) {
         this.ps = ps;
     }
 
-
     public Integer getBaujahr() {
         return baujahr;
     }
-
 
     public void setBaujahr(Integer baujahr) {
         this.baujahr = baujahr;
     }
 
-
     public String getDescription() {
         return description;
     }
 
-
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-
 }

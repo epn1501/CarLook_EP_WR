@@ -7,17 +7,12 @@ import model.dao.NeueListeDAO;
 import model.dao.ReservierungDAO;
 import model.objects.dto.NeueListe;
 import model.objects.dto.User;
-import org.atmosphere.interceptor.AtmosphereResourceStateRecovery;
 import process.control.NeueListeSearch;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Window;
 import services.util.Roles;
-import services.util.Views;
-
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Set;
-
 
 public class ReservierungsWindow extends Window {
 
@@ -28,13 +23,8 @@ public class ReservierungsWindow extends Window {
         super("Reservierungsliste");
         center();
 
-
-
-        int random =(int) (Math.random()*100);
+        //int random =(int) (Math.random()*100);
         VerticalLayout content = new VerticalLayout();
-
-
-
 
         List<NeueListe> liste = NeueListeSearch.getInstance().getNeueListeAll();
         Grid<NeueListe> grid = new Grid<>("Auswahl");
@@ -43,10 +33,8 @@ public class ReservierungsWindow extends Window {
         grid.addColumn(NeueListe::getPs).setCaption("PS");
         grid.addColumn(NeueListe::getBaujahr).setCaption("Baujahr");
         grid.addColumn(NeueListe::getDescription).setCaption("Description");
-
         // new feature goind into vaadin: column reordering
         grid.setColumnReorderingAllowed(true);
-
         grid.setItems(liste);
         grid.setSizeFull();
 
@@ -75,9 +63,9 @@ public class ReservierungsWindow extends Window {
                     //ReservierungDAO.getInstance().getReservierungsId(user);
 
                     close();
-                    // Die ReservierungsNr -> reservierungs DB + user Login
+                    // Die ReservierungsNr -> Reservierungs DB + user Login
                     ReservierungDAO.getInstance().createReservierung(user);
-                    //Db Löschen
+                    //DB Löschen
                     NeueListeDAO.getInstance().deleteTableNeueListe();
                 }
                 else{
@@ -86,7 +74,6 @@ public class ReservierungsWindow extends Window {
                 }
             }
         });
-
 
         //Button für die Löschung der Selektion in der Reservierungsliste
         Button delete = new Button("Delete");
@@ -106,22 +93,15 @@ public class ReservierungsWindow extends Window {
                     Notification.show("Das Auto mit der ID: " + selection.getValue().getId() + " wurde gelöscht!");
                     System.out.println("Das Auto mit der ID: " + selection.getValue().getId() + " wurde gelöscht!");
                     close();
-
-
-                }
-                else {
+                } else {
                     System.out.println("Der Deletebutton wurde betätigt!");
                 }
             }
         });
 
-
-
         horizontalLayout.addComponents(delete, reservieren);
         content.setSizeFull();
         content.addComponent(horizontalLayout);
         content.setComponentAlignment(horizontalLayout, Alignment.MIDDLE_CENTER);
-
-
     }
 }

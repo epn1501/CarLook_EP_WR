@@ -13,7 +13,6 @@ import model.objects.dto.User;
 import process.control.LoginControl;
 import services.util.Roles;
 import services.util.Views;
-
 import java.sql.SQLException;
 
 public class TopPanel extends HorizontalLayout {
@@ -66,14 +65,12 @@ public class TopPanel extends HorizontalLayout {
                         throwables.printStackTrace();
                     }
                     UI.getCurrent().addWindow(window);
-
                 }
             });
         }
 
         // News window
         if(user.hasRole (Roles.ADMIN)  || user.hasRole(Roles.VERTRIEBLER_USER) ) {
-
             item1.addItem("Liste", VaadinIcons.LIST, new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
@@ -95,24 +92,11 @@ public class TopPanel extends HorizontalLayout {
 
         // Hinzufügen von neuen Autos
         if(user.hasRole (Roles.ADMIN) || user.hasRole(Roles.VERTRIEBLER_USER)) {
-
             item1.addItem("Hinzufügen", VaadinIcons.PLUS_SQUARE_LEFT_O, new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
 
                     UI.getCurrent().getNavigator().navigateTo(Views.HINZUFÜGEN);
-                    /*
-                    HinzufuegenWindow window = null;
-                    try {
-                        window = new HinzufuegenWindow(TopPanel.this.autoSelection);
-                        window.setWidth("70%");
-                        window.setHeight("70%");
-                        window.center();
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
-                    UI.getCurrent().addWindow(window);
-                    */
                 }
             });
         }
@@ -122,7 +106,6 @@ public class TopPanel extends HorizontalLayout {
             item1.addItem("Logout", VaadinIcons.SIGN_OUT, new MenuBar.Command() {
                 @Override
                 public void menuSelected(MenuBar.MenuItem selectedItem) {
-
                     LoginControl.logoutUser();
                 }
             });
@@ -131,9 +114,5 @@ public class TopPanel extends HorizontalLayout {
         horizontLayout.addComponent(bar);
         this.addComponent(horizontLayout);
         this.setComponentAlignment(horizontLayout, Alignment.TOP_RIGHT);
-
-
-
-
     }
 }

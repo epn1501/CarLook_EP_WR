@@ -11,11 +11,8 @@ import model.dao.RoleDAO;
 import model.dao.UserDAO;
 import model.objects.dto.Role;
 import model.objects.dto.User;
-import process.control.exceptions.DatabaseException;
 import services.util.Roles;
 import services.util.Views;
-
-import java.sql.SQLException;
 
 public class RegisterView extends VerticalLayout implements View {
     public static final String CLASSNAME ="REGISTERSEITE";
@@ -28,7 +25,6 @@ public class RegisterView extends VerticalLayout implements View {
         userVorname.setCaption("Vorname: ");
         userVorname.setWidth("475px");
         userVorname.setPlaceholder("Vorname");
-
 
         final TextField userNachname = new TextField();
         userNachname.setCaption("*Nachname: ");
@@ -68,24 +64,15 @@ public class RegisterView extends VerticalLayout implements View {
                 String vorname = userVorname.getValue();
                 String nachname = userNachname.getValue();
 
-
                 if(userRegister.isEmpty() && passwordField.isEmpty() && userNachname.isEmpty()){
                     Notification.show("Ihre Registrierung war nicht erfolgreich! Bitte erneut versuchen!", Notification.Type.ERROR_MESSAGE);
-                }
-
-                else if(userNachname.isEmpty()){
+                } else if(userNachname.isEmpty()){
                     Notification.show("Bitte geben Sie einen Nachnamen ein.", Notification.Type.ERROR_MESSAGE);
-                }
-
-                else if (userRegister.isEmpty()){
+                } else if(userRegister.isEmpty()){
                     Notification.show("Die eingegebene E-Mail-Adresse ist ungültig!", Notification.Type.ERROR_MESSAGE);
-                }
-                else if(passwordField.isEmpty()){
+                } else if(passwordField.isEmpty()){
                     Notification.show("Das eingegebene Passwort entspricht leider nicht den Anforderungen!", Notification.Type.ERROR_MESSAGE);
-                }
-
-
-                else {
+                } else {
 
                    String s = login;
 
@@ -103,27 +90,16 @@ public class RegisterView extends VerticalLayout implements View {
 
                         rolle.setBezeichnung("vertriebler");
                         RoleDAO.getInstance().createRolle(addUser,rolle);
-
-
-
-                    }
-                    else{
+                    } else {
                         addUser.setRole(Roles.ENDKUNDE_USER);
                         System.out.println(addUser.getRole());
 
                         rolle.setBezeichnung("endkunde");
                         RoleDAO.getInstance().createRolle(addUser, rolle);
-
-
-
                     }
-
-
                     UserDAO.getInstance().createUser(addUser);
-                    //UserDAO.getInstance().addUser(addUser);
 
-
-                    System.out.println("Login: " +login + " Passwort: " + password + " " + addUser.getNachname() + "" + addUser.getVorname());
+                    System.out.println("Login: " + login + " Passwort: " + password + " " + addUser.getNachname() + "" + addUser.getVorname());
 
                     ConfirmationWindow window = new ConfirmationWindow("User wurde erstellt. Sie können sich jetzt einloggen!");
                     UI.getCurrent().addWindow(window);
@@ -131,7 +107,6 @@ public class RegisterView extends VerticalLayout implements View {
                 }
             }
         });
-
 
         Button buttonZurueck = new Button("Zurück", VaadinIcons.ARROW_LEFT);
         buttonZurueck.addClickListener(event -> UI.getCurrent().getNavigator().navigateTo(Views.LOGIN));
@@ -152,15 +127,10 @@ public class RegisterView extends VerticalLayout implements View {
         panel.setContent(layout);
         panel.setWidth("500px");
         panel.setHeight("500px");
-
-
     }
-
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event){
         this.setUp();
     }
-
-
 }

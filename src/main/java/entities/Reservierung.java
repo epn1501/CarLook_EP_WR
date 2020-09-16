@@ -9,7 +9,6 @@ public class Reservierung {
     private User user;
     private Auto auto;
 
-
     public int getReservierungsID() {
 
         return reservierungsID;
@@ -29,9 +28,6 @@ public class Reservierung {
 
         this.user = user;
     }
-
-
-
 
     public Auto getAuto() {
         return auto;
