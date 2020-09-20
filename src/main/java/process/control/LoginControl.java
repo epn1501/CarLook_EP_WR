@@ -57,7 +57,8 @@ public class LoginControl{
     }
 
     public static void logoutUser(){
-        UI.getCurrent().getPage().setLocation("/CarLook_EP_WR");
+        //UI.getCurrent().getPage().setLocation("/CarLook_EP_WR");
+        UI.getCurrent().getPage().setLocation("");
         UI.getCurrent().getSession().close();
     }
 }

@@ -33,7 +33,7 @@ public class ReservierungsWindow extends Window {
         grid.addColumn(NeueListe::getPs).setCaption("PS");
         grid.addColumn(NeueListe::getBaujahr).setCaption("Baujahr");
         grid.addColumn(NeueListe::getDescription).setCaption("Description");
-        // new feature goind into vaadin: column reordering
+        // new feature going into vaadin: column reordering
         grid.setColumnReorderingAllowed(true);
         grid.setItems(liste);
         grid.setSizeFull();
